@@ -5,7 +5,7 @@
 
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=abdu7rahman" alt="abdu7rahman" /></a> </p>
 
-- 🌱 i’m currently learning **ROS and Machine Learning**
+- 🌱 i’m currently learning **ROS2**
 
 - 👨‍💻 all of my projects are available at [github.com/abdu7rahman](github.com/abdu7rahman)
 
