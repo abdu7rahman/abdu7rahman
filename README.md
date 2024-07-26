@@ -3,6 +3,9 @@
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=abdu7rahman&label=Profile%20views&color=cc0000&style=flat" alt="abdu7rahman" /> </p>
 
+<script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="abdu7rahman" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/abdu7rahman?trk=profile-badge">Mohammed Abdul Rahman</a></div>
+              
 <p align="left"> <a href="https://github.com/ryo-ma/github-profile-trophy"><img src="https://github-profile-trophy.vercel.app/?username=abdu7rahman" alt="abdu7rahman" /></a> </p>
 
 - 🌱 i’m currently learning **ROS2**
