@@ -1,5 +1,5 @@
 <h1 align="center">hi 👋, i'm abdul rahman</h1>
-<div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="abdu7rahman" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/abdu7rahman?trk=profile-badge">Mohammed Abdul Rahman</a></div>
+< align="center" div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="abdu7rahman" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/abdu7rahman?trk=profile-badge">Mohammed Abdul Rahman</a></div>
 <h3 align="center">Robotics and Programming Enthusiast | ROS Dev</h3>
 
 <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
