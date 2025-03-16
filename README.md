@@ -23,10 +23,10 @@
 </p>
 
 <ul>
-  <li>🌱 I’m currently learning <strong>ROS2</strong></li>
+  <li>🌱 I’m currently learning everything there is to <strong>ROS2</strong></li>
   <li>👨‍💻 All my projects are available at <a href="https://github.com/abdu7rahman"><strong>GitHub</strong></a></li>
   <li>📫 How to reach me: <strong>abdulrahmantrm@gmail.com</strong></li>
-  <li>⚡ Fun fact: <strong>I think I am funny</strong></li>
+  <li>⚡ part time gamer</li>
 </ul>
 
 <h3 align="left">Languages and Tools:</h3>
