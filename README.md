@@ -1,6 +1,6 @@
 <div style="border: 2px solid #E4405F; border-radius: 15px; padding: 20px;">
 
-<h1 align="center">Hi 👋, I'm Abdul Rahman</h1>
+<h1 align="center">Hi, I'm Abdul Rahman</h1>
 
 <div align="center">
   <a href="https://in.linkedin.com/in/abdu7rahman" target="_blank">
@@ -21,10 +21,10 @@
 </p>
 
 <ul>
-  <li>🌱 I’m currently learning everything there is to <strong>ROS2</strong></li>
-  <li>👨‍💻 All my projects are available at <a href="https://github.com/abdu7rahman"><strong>GitHub</strong></a></li>
-  <li>📫 How to reach me: <strong>abdulrahmantrm@gmail.com</strong></li>
-  <li>⚡ part time gamer</li>
+  <li>I’m currently learning everything there is to <strong>ROS2</strong></li>
+  <li>All my projects are available at <a href="https://github.com/abdu7rahman"><strong>GitHub</strong></a></li>
+  <li>How to reach me: <strong>abdulrahmantrm@gmail.com</strong></li>
+  <li>part time gamer</li>
 </ul>
 
 <h3 align="left">Languages and Tools:</h3>
