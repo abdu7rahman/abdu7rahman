@@ -24,16 +24,6 @@ MS Robotics student at Northeastern University. Former Team Captain at Team Robo
 
 ---
 
-### Featured Projects
-
-| Project | Description |
-|---------|-------------|
-| **Dynamic Bin Picking** | Reactive replanning system for UR5 with real-time obstacle detection and 15-20 IK solutions per pose |
-| **GAMORA** | VR-controlled 5-DOF robotic arm with Oculus Quest 2 teleoperation and digital twin visualization |
-| **Quadruped Robot** | 12-axis legged robot with MIT Cheetah-inspired locomotion, SLAM, and autonomous navigation |
-| **Custom DWA Planner** | Built from scratch - velocity sampling, trajectory prediction, and cost evaluation for mobile robots |
-
----
 
 ### Tech Stack
 
