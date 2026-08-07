@@ -52,8 +52,8 @@
 <text class="m" x="640" y="211" font-size="9.5" letter-spacing="1.2" fill="#ffb020">IRL DEMOS</text>
 <path d="M24 232H724" stroke="#1b2634" opacity="0.45"/>
 <circle class="led" cx="34" cy="254" r="4" fill="#ff4d5e" style="animation-delay:0.96s"/>
-<text class="m" x="50" y="252" font-size="11.5" letter-spacing="1.4" fill="#e6edf3" font-weight="700">PX100 PUPPET</text>
-<text class="m" x="50" y="266" font-size="9" letter-spacing="1.1" fill="#7d8da1">MediaPipe teleop</text>
+<text class="m" x="50" y="252" font-size="11.5" letter-spacing="1.4" fill="#e6edf3" font-weight="700">SWERVE / OMNI DRIVE</text>
+<text class="m" x="50" y="266" font-size="9" letter-spacing="1.1" fill="#7d8da1">5 Robocon seasons</text>
 <rect x="330" y="247" width="300" height="7" rx="3.5" fill="#1b2634" opacity="0.7"/>
 <rect x="330" y="247" width="0" height="7" rx="3.5" fill="#ff4d5e"><animate attributeName="width" values="0;300" dur="1.1s" begin="0.90s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
 <text class="m" x="640" y="255" font-size="9.5" letter-spacing="1.2" fill="#ff4d5e">SHIPPED</text>
