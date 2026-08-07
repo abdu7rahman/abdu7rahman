@@ -9,7 +9,7 @@
 
 [![LinkedIn](https://img.shields.io/badge/LINKEDIN-abdu7rahman-0A66C2?style=for-the-badge&labelColor=0a0f16&logo=linkedin&logoColor=22d3ee)](https://linkedin.com/in/abdu7rahman)
 [![Email](https://img.shields.io/badge/EMAIL-mohammedabdulr.1-ff4d5e?style=for-the-badge&labelColor=0a0f16&logo=maildotru&logoColor=ff4d5e)](mailto:mohammedabdulr.1@northeastern.edu)
-[![Portfolio](https://img.shields.io/badge/PORTFOLIO-abdu7rahman.github.io-35e08a?style=for-the-badge&labelColor=0a0f16&logo=githubpages&logoColor=35e08a)](https://abdu7rahman.github.io/portfolio/)
+[![Portfolio](https://img.shields.io/badge/PORTFOLIO-abdu7rahman.github.io-35e08a?style=for-the-badge&labelColor=0a0f16&logo=githubpages&logoColor=35e08a)](https://abdu7rahman.github.io/)
 ![Visitors](https://komarev.com/ghpvc/?username=abdu7rahman&style=for-the-badge&color=22d3ee&label=SCANS)
 
 </div>
@@ -112,6 +112,24 @@ controller actually evaluates each cycle, numpy is paying fixed per-call overhea
 trajectories and loses by 26×. Hand it 2,626 trajectories and vectorisation amortises that down to 4×.
 So the C++ port buys the most where it matters least — both clear a 20 Hz budget on the real window — and
 the global planner is where it actually earns its keep.
+
+### Garment folding, against the literature
+
+Published figures, each measured on its own task. **This is context, not a leaderboard** — no two rows
+share a task, a robot or a success criterion.
+
+| System | Reported | Measured on | Source |
+| --- | --- | --- | --- |
+| **This project** — ACT / Diffusion Policy / smolVLA | **60.4%** avg, **78%** peak | Bimanual multi-garment folding, 4 categories, Isaac Sim | — |
+| SpeedFolding — Avigal et al., IROS 2022 | 93%, <120 s per fold | Real garments from a random initial configuration, engineered bimanual primitives, 4,300 annotated actions | [2208.10552](https://arxiv.org/abs/2208.10552) |
+| ACT — Zhao et al., RSS 2023 | 80–90% | Six fine-grained bimanual tasks (battery slotting, condiment cup). Rigid objects | [2304.13705](https://arxiv.org/abs/2304.13705) |
+| smolVLA — Hugging Face, 2025 | 78.3% | SO100 pick-place, stacking, sorting. Rigid objects | [blog](https://huggingface.co/blog/smolvla) |
+| Diffusion Policy — Chi et al., RSS 2023 | +46.9% over prior SOTA | 12 tasks across 4 manipulation benchmarks | [2303.04137](https://arxiv.org/abs/2303.04137) |
+
+Two things it does show. The 78–90% those architectures report is on **rigid** objects — none of it is
+deformables, which is the part that makes garments hard. And the one row that *is* garment folding,
+SpeedFolding at 93%, gets there with engineered bimanual action primitives and 4,300 annotated actions
+rather than an end-to-end learned policy. The distance between 60.4% and 93% is mostly that gap.
 
 <sub>Harness and method: [`reactive_autonomous_nav/bench`](https://github.com/abdu7rahman/reactive_autonomous_nav/tree/main/bench) · `./bench/run.sh` reproduces every number · nothing is reimplemented, both harnesses call the planners' own code</sub>
 
