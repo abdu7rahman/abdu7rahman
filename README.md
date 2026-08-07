@@ -163,7 +163,7 @@ deformables, which is the part that makes garments hard. And the one row that *i
 SpeedFolding at 93%, gets there with engineered bimanual action primitives and 4,300 annotated actions
 rather than an end-to-end learned policy. The distance between 60.4% and 93% is mostly that gap.
 
-<sub>Harness and method: [`reactive_autonomous_nav/bench`](https://github.com/abdu7rahman/reactive_autonomous_nav/tree/main/bench) · `./bench/run.sh` reproduces every number · nothing is reimplemented, both harnesses call the planners' own code</sub>
+<sub>Harness and method: [`reactive_autonomous_nav/bench`](https://github.com/abdu7rahman/reactive_autonomous_nav/tree/bench/planner-latency/bench) · `./bench/run.sh` reproduces every number · nothing is reimplemented, both harnesses call the planners' own code</sub>
 
 <img src="assets/divider.svg" alt="" width="100%">
 
