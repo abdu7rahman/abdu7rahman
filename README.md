@@ -30,53 +30,12 @@ I work on physical AI and the motion stack underneath it — planning, reactive 
 locomotion, and the unglamorous bringup that makes any of it run on real hardware. Lately I've been
 pointing learned policies at deformable objects and watching them fail in instructive ways.
 
-<table>
-<tr>
-<td width="33%" valign="top">
-
-**`▸ NOW`**
-
-Advanced Robotics and AI intern
-at **Siemens**, Berkeley. Before
-that, Northeastern's robotics lab
-— ROS 2 bag collection and visual
-SLAM on a **Ford Mustang Mach-E**
-AV platform, the UR12e + Robotiq
-MoveIt 2 stack, and a camera mount
-now used across several faculty
-setups.
-
-</td>
-<td width="33%" valign="top">
-
-**`▸ NEXT`**
-
-Sim-to-real transfer of bimanual
-garment-folding policies onto a
-real UR12e. Inverse RL on quadruped
-locomotion demonstrations, aimed at
-a **Unitree Go2**. Finishing the C++
-port of the navigation stack — the
-[measurements](#measured) below are
-what motivated it.
-
-</td>
-<td width="33%" valign="top">
-
-**`▸ ALWAYS`**
-
-Planners written from scratch
-before reaching for a library,
-because the failure modes are the
-interesting part. Numbers I can
-reproduce rather than numbers I
-remember. PCBs, end effectors, and
-the occasional robot that throws an
-arrow across an arena.
-
-</td>
-</tr>
-</table>
+| | |
+| --- | --- |
+| **Now** | Advanced Robotics and AI intern at **Siemens**, Berkeley |
+| **Building** | Sim-to-real transfer of bimanual garment policies onto a UR12e |
+| **Next** | Inverse RL on quadruped locomotion, aimed at a **Unitree Go2** |
+| **Always** | Planners written from scratch, then measured rather than assumed |
 
 <img src="assets/divider.svg" alt="" width="100%">
 
@@ -94,76 +53,11 @@ arrow across an arena.
 
 <img src="assets/divider.svg" alt="" width="100%">
 
-<h2 id="measured">&nbsp;▸&nbsp; MEASURED</h2>
-
-I claimed in a résumé that porting my planners to C++ made them faster. That was an impression, so I
-wrote a harness and turned it into a number. It found something I didn't expect.
+## &nbsp;▸&nbsp; BOARD
 
 <div align="center">
-<img src="assets/bench.svg" alt="Measured planner latency, Python versus C++, log scale. A*: 128x128 map 7.50 vs 0.046 ms; 256x256 110.26 vs 1.115 ms; 384x384 884.21 vs 4.598 ms. DWA rollout: accel-limited window 0.3037 vs 0.0098 ms; full velocity space 4.2121 vs 1.0570 ms." width="100%">
+<img src="assets/board.svg" alt="Systems board: five robotics systems with live status bars, a UR12e running a pick-and-place cycle that replans when an obstacle appears, and a scrolling telemetry log." width="100%">
 </div>
-
-The A\* gap is not all language. The C++ port also introduced a closed set, so it expands 21,015 nodes
-where Python expands 61,631 on the same map — roughly 3× of the difference is algorithmic and the rest is
-`heapq` of tuples versus a `priority_queue` of PODs.
-
-The DWA result is the one that surprised me: the speedup *shrinks* as the batch grows. At the window the
-controller actually evaluates each cycle, numpy is paying fixed per-call overhead across a few dozen
-trajectories and loses by 26×. Hand it 2,626 trajectories and vectorisation amortises that down to 4×.
-So the C++ port buys the most where it matters least — both clear a 20 Hz budget on the real window — and
-the global planner is where it actually earns its keep.
-
-### Obstacle detection, and where it goes blind
-
-The UR12e demo either sees the hand or it doesn't. I wrote a harness that drives the detector's own
-`_cloud_cb` on synthetic frames with a known ground-truth obstacle, so misses get counted instead of
-estimated.
-
-| Obstacle radius | Detected | Centroid error | Latency |
-| ---: | ---: | ---: | ---: |
-| 2 cm | 0 / 40 | — | — |
-| 3 cm | 0 / 40 | — | — |
-| 4 cm | **40 / 40** | 2.3 mm | 0.10 s |
-| 6 cm | **40 / 40** | 2.1 mm | 0.10 s |
-| 10 cm | **40 / 40** | 2.1 mm | 0.10 s |
-
-Below ~4 cm an object returns fewer points than the threshold and is never seen. Above it the detector
-saturates — size stops mattering, the centroid lands within 2 mm, detection takes two frames at 20 Hz.
-**0 false positives in 300 frames** with the arm in view, and the pipeline runs in 2.47 ms against a
-50 ms budget, so latency is the debounce counter rather than compute.
-
-Then the number I'd rather publish than hide — an obstacle walked in toward the forearm:
-
-| Distance to nearest link | 8 cm | 10 cm | 11 cm | 12 cm | 30 cm |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Detected | **0%** | **0%** | 76% | 100% | 100% |
-
-`ARM_SEG_RADIUS` carves a 12 cm tube around the kinematic chain and everything inside it is discarded
-as the robot's own body. A hand closer than ~11 cm to a link is *invisible*, not detected late. It's a
-deliberate trade against phantom detections off the arm, but it means the safety claim is "avoids what
-it can see" — and things within 11 cm aren't in that set.
-
-<sub>The detector is real code; the sensor is modelled — no occlusion shadow, no RealSense speckle, no lighting variation. These bound the clean-input case and locate the geometric cliffs exactly. Method: [`reactive-replanning-ur12e/tests`](https://github.com/abdu7rahman/reactive-replanning-ur12e/tree/bench/detection-tests/tests)</sub>
-
-### Garment folding, against the literature
-
-Published figures, each measured on its own task. **This is context, not a leaderboard** — no two rows
-share a task, a robot or a success criterion.
-
-| System | Reported | Measured on | Source |
-| --- | --- | --- | --- |
-| **This project** — ACT / Diffusion Policy / smolVLA | **60.4%** avg, **78%** peak | Bimanual multi-garment folding, 4 categories, Isaac Sim | — |
-| SpeedFolding — Avigal et al., IROS 2022 | 93%, <120 s per fold | Real garments from a random initial configuration, engineered bimanual primitives, 4,300 annotated actions | [2208.10552](https://arxiv.org/abs/2208.10552) |
-| ACT — Zhao et al., RSS 2023 | 80–90% | Six fine-grained bimanual tasks (battery slotting, condiment cup). Rigid objects | [2304.13705](https://arxiv.org/abs/2304.13705) |
-| smolVLA — Hugging Face, 2025 | 78.3% | SO100 pick-place, stacking, sorting. Rigid objects | [blog](https://huggingface.co/blog/smolvla) |
-| Diffusion Policy — Chi et al., RSS 2023 | +46.9% over prior SOTA | 12 tasks across 4 manipulation benchmarks | [2303.04137](https://arxiv.org/abs/2303.04137) |
-
-Two things it does show. The 78–90% those architectures report is on **rigid** objects — none of it is
-deformables, which is the part that makes garments hard. And the one row that *is* garment folding,
-SpeedFolding at 93%, gets there with engineered bimanual action primitives and 4,300 annotated actions
-rather than an end-to-end learned policy. The distance between 60.4% and 93% is mostly that gap.
-
-<sub>Harness and method: [`reactive_autonomous_nav/bench`](https://github.com/abdu7rahman/reactive_autonomous_nav/tree/bench/planner-latency/bench) · `./bench/run.sh` reproduces every number · nothing is reimplemented, both harnesses call the planners' own code</sub>
 
 <img src="assets/divider.svg" alt="" width="100%">
 
@@ -176,13 +70,14 @@ rather than an end-to-end learned policy. The distance between 60.4% and 93% is 
 
 **Bimanual Garment Manipulation**
 
-`Isaac Sim` `ACT` `Diffusion Policy`
-`smolVLA` `Physical AI`
+`Isaac Sim` `π0 / π0.5` `OpenPI`
+`ACT` `Diffusion Policy` `smolVLA`
 
 </td><td valign="top">
 
-Trained and evaluated three policy architectures on multi-garment folding in a bimanual setup.
-Sim-to-real transfer onto a UR12e is in progress.
+Trained and evaluated ACT, Diffusion Policy and smolVLA on multi-garment folding in a bimanual
+setup, alongside work with π0, π0.5 and OpenPI across the VLA stack. Sim-to-real transfer onto a
+UR12e is in progress.
 
 </td><td valign="top">
 
@@ -305,7 +200,7 @@ interfaces.
 | --- | --- |
 | **Frameworks** | ROS / ROS 2 (Humble, Jazzy) · MoveIt 2 · Nav2 · Gazebo · RViz · Isaac Sim · Autoware |
 | **Planning** | A\* · Theta\* · SMAC · RRT / RRT-Connect · BIT\* · DWA · Pure Pursuit · Stanley · TEB · MPPI |
-| **Physical AI** | ACT · Diffusion Policy · smolVLA · inverse RL · sim-to-real transfer · foundation models |
+| **Physical AI** | π0 · π0.5 · OpenPI · ACT · Diffusion Policy · smolVLA · VLA fine-tuning · inverse RL · sim-to-real transfer |
 | **Perception** | YOLO · OpenCV · depth estimation · sensor fusion · OctoMap · visual SLAM (PySLAM) |
 | **Hardware** | UR12e / UR5 · Robotiq Hand-E & 2F-85 · PincherX100 · TurtleBot3/4 · Unitree Go2 · Jetson Nano · Raspberry Pi · Arduino |
 | **Sensors** | LiDAR · IMU · wheel encoders · Intel RealSense D435i · GPS/GNSS RTK |
