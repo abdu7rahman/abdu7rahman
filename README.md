@@ -113,6 +113,38 @@ trajectories and loses by 26×. Hand it 2,626 trajectories and vectorisation amo
 So the C++ port buys the most where it matters least — both clear a 20 Hz budget on the real window — and
 the global planner is where it actually earns its keep.
 
+### Obstacle detection, and where it goes blind
+
+The UR12e demo either sees the hand or it doesn't. I wrote a harness that drives the detector's own
+`_cloud_cb` on synthetic frames with a known ground-truth obstacle, so misses get counted instead of
+estimated.
+
+| Obstacle radius | Detected | Centroid error | Latency |
+| ---: | ---: | ---: | ---: |
+| 2 cm | 0 / 40 | — | — |
+| 3 cm | 0 / 40 | — | — |
+| 4 cm | **40 / 40** | 2.3 mm | 0.10 s |
+| 6 cm | **40 / 40** | 2.1 mm | 0.10 s |
+| 10 cm | **40 / 40** | 2.1 mm | 0.10 s |
+
+Below ~4 cm an object returns fewer points than the threshold and is never seen. Above it the detector
+saturates — size stops mattering, the centroid lands within 2 mm, detection takes two frames at 20 Hz.
+**0 false positives in 300 frames** with the arm in view, and the pipeline runs in 2.47 ms against a
+50 ms budget, so latency is the debounce counter rather than compute.
+
+Then the number I'd rather publish than hide — an obstacle walked in toward the forearm:
+
+| Distance to nearest link | 8 cm | 10 cm | 11 cm | 12 cm | 30 cm |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Detected | **0%** | **0%** | 76% | 100% | 100% |
+
+`ARM_SEG_RADIUS` carves a 12 cm tube around the kinematic chain and everything inside it is discarded
+as the robot's own body. A hand closer than ~11 cm to a link is *invisible*, not detected late. It's a
+deliberate trade against phantom detections off the arm, but it means the safety claim is "avoids what
+it can see" — and things within 11 cm aren't in that set.
+
+<sub>The detector is real code; the sensor is modelled — no occlusion shadow, no RealSense speckle, no lighting variation. These bound the clean-input case and locate the geometric cliffs exactly. Method: [`reactive-replanning-ur12e/tests`](https://github.com/abdu7rahman/reactive-replanning-ur12e/tree/bench/detection-tests/tests)</sub>
+
 ### Garment folding, against the literature
 
 Published figures, each measured on its own task. **This is context, not a leaderboard** — no two rows
@@ -175,9 +207,9 @@ mid-motion.
 
 </td><td valign="top">
 
-**120** IK solutions<br>
-8 candidate plans<br>
-**1–3 s** replan
+**100%** detection<br>
+≥4 cm, 0.10 s<br>
+blind within **11 cm**
 
 </td></tr>
 
