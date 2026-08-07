@@ -12,6 +12,10 @@
 [![Portfolio](https://img.shields.io/badge/PORTFOLIO-abdu7rahman.github.io-35e08a?style=for-the-badge&labelColor=0a0f16&logo=githubpages&logoColor=35e08a)](https://abdu7rahman.github.io/)
 ![Visitors](https://komarev.com/ghpvc/?username=abdu7rahman&style=for-the-badge&color=22d3ee&label=SCANS)
 
+<br>
+
+[![Run the planners](https://img.shields.io/badge/▶%20RUN%20MY%20PLANNERS%20IN%20YOUR%20BROWSER-A*%20·%20Theta*%20·%20RRT%2C%20fetched%20live%20from%20this%20account-ffb020?style=for-the-badge&labelColor=0a0f16)](https://abdu7rahman.github.io/demo.html)
+
 </div>
 
 <img src="assets/divider.svg" alt="" width="100%">
@@ -165,25 +169,7 @@ most-starred repo
 
 </td></tr>
 
-<tr><td valign="top">
 
-**[PX100 Puppet Control](https://github.com/abdu7rahman/pincher-x100-puppet-control)** · [▶ demo](https://www.youtube.com/watch?v=WEzc5oIadew)
-
-`ROS 2 Humble` `MediaPipe` `MoveIt 2`
-
-</td><td valign="top">
-
-Vision-only teleoperation: hand position maps to four joints, thumb-index pinch drives the gripper.
-No VR, no controller, and not a defensible way to run a manipulator — a proof of concept for intuitive
-interfaces.
-
-</td><td valign="top">
-
-**30** FPS tracking<br>
-**~200 ms** latency<br>
-4-DOF mapping
-
-</td></tr>
 </table>
 
 <img src="assets/divider.svg" alt="" width="100%">
@@ -202,7 +188,7 @@ interfaces.
 | **Planning** | A\* · Theta\* · SMAC · RRT / RRT-Connect · BIT\* · DWA · Pure Pursuit · Stanley · TEB · MPPI |
 | **Physical AI** | π0 · π0.5 · OpenPI · ACT · Diffusion Policy · smolVLA · VLA fine-tuning · inverse RL · sim-to-real transfer |
 | **Perception** | YOLO · OpenCV · depth estimation · sensor fusion · OctoMap · visual SLAM (PySLAM) |
-| **Hardware** | UR12e / UR5 · Robotiq Hand-E & 2F-85 · PincherX100 · TurtleBot3/4 · Unitree Go2 · Jetson Nano · Raspberry Pi · Arduino |
+| **Hardware** | UR12e / UR5 · Robotiq Hand-E & 2F-85 · TurtleBot3/4 · Unitree Go2 · Jetson Nano · Raspberry Pi · Arduino |
 | **Sensors** | LiDAR · IMU · wheel encoders · Intel RealSense D435i · GPS/GNSS RTK |
 | **Design** | SolidWorks · OnShape · Eagle PCB · URDF / XACRO |
 
