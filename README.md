@@ -7,14 +7,13 @@
 
 <br>
 
-[![LinkedIn](https://img.shields.io/badge/LINKEDIN-abdu7rahman-0A66C2?style=for-the-badge&labelColor=0a0f16&logo=linkedin&logoColor=22d3ee)](https://linkedin.com/in/abdu7rahman)
-[![Email](https://img.shields.io/badge/EMAIL-mohammedabdulr.1-ff4d5e?style=for-the-badge&labelColor=0a0f16&logo=maildotru&logoColor=ff4d5e)](mailto:mohammedabdulr.1@northeastern.edu)
-[![Portfolio](https://img.shields.io/badge/PORTFOLIO-abdu7rahman.github.io-35e08a?style=for-the-badge&labelColor=0a0f16&logo=githubpages&logoColor=35e08a)](https://abdu7rahman.github.io/)
-![Visitors](https://komarev.com/ghpvc/?username=abdu7rahman&style=for-the-badge&color=22d3ee&label=SCANS)
+[<img src="assets/link-linkedin.svg" alt="LinkedIn — in/abdu7rahman" height="42">](https://linkedin.com/in/abdu7rahman)
+[<img src="assets/link-site.svg" alt="Portfolio — abdu7rahman.github.io" height="42">](https://abdu7rahman.github.io/)
+[<img src="assets/link-email.svg" alt="Email — mohammedabdulr.1@northeastern.edu" height="42">](mailto:mohammedabdulr.1@northeastern.edu)
 
 <br>
 
-[![Run the planners](https://img.shields.io/badge/▶%20RUN%20MY%20PLANNERS%20IN%20YOUR%20BROWSER-A*%20·%20Theta*%20·%20RRT%2C%20fetched%20live%20from%20this%20account-ffb020?style=for-the-badge&labelColor=0a0f16)](https://abdu7rahman.github.io/demo.html)
+[<img src="assets/link-demo.svg" alt="Run my planners — A*, Theta* and RRT, live in your browser" height="50">](https://abdu7rahman.github.io/demo.html)
 
 </div>
 
@@ -164,7 +163,7 @@ rollout, cost evaluation, and marker visualisation of every candidate.
 
 </td><td valign="top">
 
-⭐ **6** stars<br>
+**6** stars<br>
 most-starred repo
 
 </td></tr>
@@ -175,12 +174,6 @@ most-starred repo
 <img src="assets/divider.svg" alt="" width="100%">
 
 ## &nbsp;▸&nbsp; STACK
-
-<div align="center">
-
-<img src="https://skillicons.dev/icons?i=ros,python,cpp,c,linux,docker,git,github,opencv,pytorch,cmake,bash,arduino,raspberrypi,matlab,vscode&theme=dark&perline=16" alt="ROS, Python, C++, C, Linux, Docker, Git, GitHub, OpenCV, PyTorch, CMake, Bash, Arduino, Raspberry Pi, MATLAB, VS Code">
-
-</div>
 
 | | |
 | --- | --- |
@@ -229,21 +222,20 @@ code doesn't skew the split.
 
 </details>
 
+<img src="assets/divider.svg" alt="" width="100%">
+
+## &nbsp;▸&nbsp; TODAY'S RUN
+
 <div align="center">
-
-<img src="https://streak-stats.demolab.com?user=abdu7rahman&theme=dark&background=0a0f16&border=1b2634&stroke=1b2634&ring=22d3ee&fire=ff4d5e&currStreakLabel=22d3ee&sideLabels=7d8da1&currStreakNum=e6edf3&sideNums=e6edf3&dates=6e7d90&border_radius=10&card_width=470" alt="GitHub commit streak" height="180">
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=abdu7rahman&bg_color=0a0f16&color=e6edf3&line=22d3ee&point=ff4d5e&area_color=22d3ee&title_color=22d3ee&area=true&hide_border=false&border_color=1b2634&radius=10&custom_title=CONTRIBUTION%20TRACE%20%E2%80%94%20LAST%2031%20DAYS" alt="Contribution activity graph, last 31 days" width="100%">
-
-<!-- Snake: populated by .github/workflows/snake.yml. Run it once (Actions → Contribution Snake →
-     Run workflow) after merging, or wait for the daily schedule, and this starts rendering. -->
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/abdu7rahman/abdu7rahman/output/snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/abdu7rahman/abdu7rahman/output/snake.svg">
-  <img alt="A snake eating my contribution graph" src="https://raw.githubusercontent.com/abdu7rahman/abdu7rahman/output/snake.svg" width="100%">
-</picture>
-
+<img src="assets/run.svg" alt="A* and Theta* searching the same map side by side: the expansion wavefronts spread cell by cell, then each planner's path is drawn on, with node counts and search times." width="100%">
 </div>
+
+> Not a screenshot. A GitHub Action seeds a fresh map every night, fetches `astar_planner.py` and
+> `theta_star_planner.py` from [the nav repo](https://github.com/abdu7rahman/reactive_autonomous_nav),
+> runs both searches, and renders the expansion order into the SVG above. The node counts and
+> millisecond figures are whatever the run produced —
+> [the generator is here](tools/gen_run.py).
+> Want to drive it yourself? [Draw your own map](https://abdu7rahman.github.io/demo.html).
 
 <img src="assets/divider.svg" alt="" width="100%">
 
@@ -293,9 +285,9 @@ code doesn't skew the split.
 
 <div align="center">
 
-### `▸` Get in touch
+### `▸` Send a goal pose
 
-[![Email](https://img.shields.io/badge/SEND%20A%20GOAL%20POSE-mohammedabdulr.1%40northeastern.edu-22d3ee?style=for-the-badge&labelColor=0a0f16)](mailto:mohammedabdulr.1@northeastern.edu)
+[<img src="assets/link-email.svg" alt="Email — mohammedabdulr.1@northeastern.edu" height="48">](mailto:mohammedabdulr.1@northeastern.edu)
 
 <br>
 
