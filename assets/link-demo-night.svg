@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 56" width="448" height="56" fill="none" role="img" aria-label="RUN MY ROBOTS — search a map · chase a cursor · reach into the cell">
+<rect x="0.5" y="0.5" width="447" height="55" rx="3" fill="#172420" stroke="#2c3f3a"/>
+<rect x="0.5" y="0.5" width="3.5" height="55" fill="#8d9c58"/>
+<g transform="translate(20 16) scale(1)"><path fill="#8d9c58" d="M8.5 5.2 19 12 8.5 18.8Z"/></g>
+<text x="58" y="24" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#f3ece0">RUN MY ROBOTS</text>
+<text x="58" y="40" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="#9ba59f">search a map · chase a cursor · reach into the cell</text>
+<path d="M435 6H442V13" stroke="#8d9c58" stroke-width="1.4" opacity="0.8"/>
+</svg>
