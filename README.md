@@ -113,7 +113,7 @@ blind within **11 cm**
 
 <tr><td valign="top">
 
-**[Reactive Autonomous Nav Stack](https://github.com/abdu7rahman/reactive_autonomous_nav)** · [drive it](https://abdu7rahman.github.io/demo.html#drive)
+**[Reactive Autonomous Nav Stack](https://github.com/abdu7rahman/reactive_autonomous_nav)** · [drive it](https://abdu7rahman.github.io/demo.html#drive) · [race the controllers](https://abdu7rahman.github.io/demo.html#race)
 
 `ROS 2 Jazzy` `TurtleBot4` `C++`
 `nav2_costmap_2d`
@@ -235,9 +235,10 @@ code doesn't skew the split.
 > runs both searches, and renders the expansion order into the SVG above. The node counts and
 > millisecond figures are whatever the run produced —
 > [the generator is here](tools/gen_run.py).
-> Want to drive it yourself? [Three of these repos run in your browser](https://abdu7rahman.github.io/demo.html) —
-> search a map you draw, chase a cursor with the DWA controller while you throw obstacles at it, or
-> reach into the UR12e's cell and find where its detector stops seeing you.
+> Want to drive it yourself? [These repos run in your browser](https://abdu7rahman.github.io/demo.html) —
+> search a map you draw with any of five planners, chase a cursor with the DWA controller while you
+> throw obstacles at it, race all five local controllers over one plan, or reach into the UR12e's
+> cell and block the arm until it cancels the motion and replans around you.
 
 <img src="assets/divider.svg" alt="" width="100%">
 
