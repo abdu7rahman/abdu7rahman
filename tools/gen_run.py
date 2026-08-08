@@ -14,11 +14,17 @@ import numpy as np
 
 REPO = "abdu7rahman/reactive_autonomous_nav"
 RAW = "https://raw.githubusercontent.com/" + REPO + "/main/reactive_autonomous_nav/"
-OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", "run.svg")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from palette import WARMDAY, NIGHT, MONO as MONO_STACK, suffix          # noqa: E402
 
-BG = "#05080c"; PANEL = "#0a0f16"; GRID = "#111a25"; LINE = "#1b2634"
-TXT = "#e6edf3"; MUT = "#7d8da1"; CY = "#22d3ee"; AMB = "#ffb020"; GRN = "#35e08a"; VIO = "#a78bfa"
-MONO = "ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace"
+THEME = NIGHT if os.environ.get("PLATE_THEME") == "night" else WARMDAY
+ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
+OUT = os.path.join(ASSETS, "run%s.svg" % suffix(THEME))
+
+BG = THEME["bg"]; PANEL = THEME["panel"]; GRID = THEME["grid"]; LINE = THEME["line"]
+TXT = THEME["txt"]; MUT = THEME["mut"]
+CY = THEME["c1"]; VIO = THEME["c3"]; GRN = THEME["c4"]; AMB = THEME["c4"]
+MONO = MONO_STACK
 
 COLS, ROWS = 78, 46
 CELL = 7.2

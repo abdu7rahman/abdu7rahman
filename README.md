@@ -3,21 +3,21 @@
 
 <div align="center">
 
-<img src="assets/hero.svg" alt="Mohammed Abdul Rahman — Robotics Engineer, ROS 2 / MoveIt 2, Physical AI, MS Robotics at Northeastern University" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-night.svg"><img src="assets/hero.svg" alt="Mohammed Abdul Rahman — Robotics Engineer, ROS 2 / MoveIt 2, Physical AI, MS Robotics at Northeastern University" width="100%"></picture>
 
 <br>
 
-[<img src="assets/link-linkedin.svg" alt="LinkedIn — in/abdu7rahman" height="42">](https://linkedin.com/in/abdu7rahman)
-[<img src="assets/link-site.svg" alt="Portfolio — abdu7rahman.github.io" height="42">](https://abdu7rahman.github.io/)
-[<img src="assets/link-email.svg" alt="Email — mohammedabdulr.1@northeastern.edu" height="42">](mailto:mohammedabdulr.1@northeastern.edu)
+[<picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-linkedin-night.svg"><img src="assets/link-linkedin.svg" alt="LinkedIn — in/abdu7rahman" height="42"></picture>](https://linkedin.com/in/abdu7rahman)
+[<picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-site-night.svg"><img src="assets/link-site.svg" alt="Portfolio — abdu7rahman.github.io" height="42"></picture>](https://abdu7rahman.github.io/)
+[<picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-night.svg"><img src="assets/link-email.svg" alt="Email — mohammedabdulr.1@northeastern.edu" height="42"></picture>](mailto:mohammedabdulr.1@northeastern.edu)
 
 <br>
 
-[<img src="assets/link-demo.svg" alt="Run my robots — search a map, chase a cursor, reach into the cell" height="50">](https://abdu7rahman.github.io/demo.html)
+[<picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-demo-night.svg"><img src="assets/link-demo.svg" alt="Run my robots — search a map, chase a cursor, reach into the cell" height="50"></picture>](https://abdu7rahman.github.io/demo.html)
 
 </div>
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; WHOAMI
 
@@ -40,12 +40,12 @@ pointing learned policies at deformable objects and watching them fail in instru
 | **Next** | Inverse RL on quadruped locomotion, aimed at a **Unitree Go2** |
 | **Always** | Planners written from scratch, then measured rather than assumed |
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; THE LAB
 
 <div align="center">
-<img src="assets/lab.svg" alt="Three animated simulations: a DWA local planner scoring 15 velocity rollouts and committing to the lowest-cost arc; a UR12e holding one end-effector pose while switching IK solutions along the elbow self-motion manifold to dodge an obstacle; a 12-axis quadruped walking a trot gait." width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/lab-night.svg"><img src="assets/lab.svg" alt="Three animated simulations: a DWA local planner scoring 15 velocity rollouts and committing to the lowest-cost arc; a UR12e holding one end-effector pose while switching IK solutions along the elbow self-motion manifold to dodge an obstacle; a 12-axis quadruped walking a trot gait." width="100%"></picture>
 </div>
 
 > Three things I actually built, simulated in SVG rather than screenshotted. **Left:** velocity rollouts get
@@ -54,15 +54,15 @@ pointing learned policies at deformable objects and watching them fail in instru
 > along the elbow self-motion manifold to clear the obstacle. **Right:** a diagonal trot, knee bending
 > backward on the front pair and forward on the rear.
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; BOARD
 
 <div align="center">
-<img src="assets/board.svg" alt="Systems board: five robotics systems with live status bars, a UR12e running a pick-and-place cycle that replans when an obstacle appears, and a scrolling telemetry log." width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/board-night.svg"><img src="assets/board.svg" alt="Systems board: five robotics systems with live status bars, a UR12e running a pick-and-place cycle that replans when an obstacle appears, and a scrolling telemetry log." width="100%"></picture>
 </div>
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; SYSTEMS
 
@@ -171,7 +171,7 @@ most-starred repo
 
 </table>
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; STACK
 
@@ -185,12 +185,12 @@ most-starred repo
 | **Sensors** | LiDAR · IMU · wheel encoders · Intel RealSense D435i · GPS/GNSS RTK |
 | **Design** | SolidWorks · OnShape · Eagle PCB · URDF / XACRO |
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; TELEMETRY
 
 <div align="center">
-<img src="assets/stats.svg" alt="Two charts. Left: monthly commit cadence — 240 commits authored across 61 months from 2021-07 to 2026-07, 20 active months, median 8, peak 49. Right: source-byte mix across 27 repositories — Python 30.7%, CMake 18.1%, YAML 15.0%, XML/URDF 14.8%, C++ 8.5%, Other 12.9%." width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/stats-night.svg"><img src="assets/stats.svg" alt="Two charts. Left: monthly commit cadence — 240 commits authored across 61 months from 2021-07 to 2026-07, 20 active months, median 8, peak 49. Right: source-byte mix across 27 repositories — Python 30.7%, CMake 18.1%, YAML 15.0%, XML/URDF 14.8%, C++ 8.5%, Other 12.9%." width="100%"></picture>
 </div>
 
 <details>
@@ -222,12 +222,12 @@ code doesn't skew the split.
 
 </details>
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; TODAY'S RUN
 
 <div align="center">
-<img src="assets/run.svg" alt="A* and Theta* searching the same map side by side: the expansion wavefronts spread cell by cell, then each planner's path is drawn on, with node counts and search times." width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/run-night.svg"><img src="assets/run.svg" alt="A* and Theta* searching the same map side by side: the expansion wavefronts spread cell by cell, then each planner's path is drawn on, with node counts and search times." width="100%"></picture>
 </div>
 
 > Not a screenshot. A GitHub Action seeds a fresh map every night, fetches `astar_planner.py` and
@@ -239,7 +239,7 @@ code doesn't skew the split.
 > search a map you draw, chase a cursor with the DWA controller while you throw obstacles at it, or
 > reach into the UR12e's cell and find where its detector stops seeing you.
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 ## &nbsp;▸&nbsp; TRAJECTORY
 
@@ -283,13 +283,13 @@ code doesn't skew the split.
        ●  manipulator; coordinate-based autonomous navigation on hardware.
 ```
 
-<img src="assets/divider.svg" alt="" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/divider-night.svg"><img src="assets/divider.svg" alt="" width="100%"></picture>
 
 <div align="center">
 
 ### `▸` Send a goal pose
 
-[<img src="assets/link-email.svg" alt="Email — mohammedabdulr.1@northeastern.edu" height="48">](mailto:mohammedabdulr.1@northeastern.edu)
+[<picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-night.svg"><img src="assets/link-email.svg" alt="Email — mohammedabdulr.1@northeastern.edu" height="48"></picture>](mailto:mohammedabdulr.1@northeastern.edu)
 
 <br>
 

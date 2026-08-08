@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 56" width="396" height="56" fill="none" role="img" aria-label="RUN MY ROBOTS — search, drive and reach in, live in your browser">
-<rect x="0.5" y="0.5" width="395" height="55" rx="3" fill="#0a0f16" stroke="#1b2634"/>
-<rect x="0.5" y="0.5" width="3.5" height="55" fill="#ffb020"/>
-<g transform="translate(20 16) scale(1)"><path fill="#ffb020" d="M8.5 5.2 19 12 8.5 18.8Z"/></g>
-<text x="58" y="24" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#e6edf3">RUN MY ROBOTS</text>
-<text x="58" y="40" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="#7d8da1">search a map · chase a cursor · reach into the cell</text>
-<path d="M383 6H390V13" stroke="#ffb020" stroke-width="1.4" opacity="0.8"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 56" width="448" height="56" fill="none" role="img" aria-label="RUN MY ROBOTS — search a map · chase a cursor · reach into the cell">
+<rect x="0.5" y="0.5" width="447" height="55" rx="3" fill="#f6efe0" stroke="#d6cdbc"/>
+<rect x="0.5" y="0.5" width="3.5" height="55" fill="#6d7f45"/>
+<g transform="translate(20 16) scale(1)"><path fill="#6d7f45" d="M8.5 5.2 19 12 8.5 18.8Z"/></g>
+<text x="58" y="24" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#2c2a23">RUN MY ROBOTS</text>
+<text x="58" y="40" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="#565f5a">search a map · chase a cursor · reach into the cell</text>
+<path d="M435 6H442V13" stroke="#6d7f45" stroke-width="1.4" opacity="0.8"/>
 </svg>
