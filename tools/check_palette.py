@@ -86,8 +86,8 @@ def report(name, paper, ink, cats):
         L, C, H = lch(v)
         c = contrast(v, paper)
         why = []
-        if not (34 <= L <= 78):
-            why.append("L* outside 34-78")
+        if not (44 <= L <= 88):
+            why.append("L* outside 44-88")
         if C < 18:
             why.append("chroma %.0f below 18" % C)
         if c < 3.0:
@@ -110,9 +110,13 @@ def report(name, paper, ink, cats):
     return bad
 
 
-LIGHT = {"pine": "#3f6b57", "clay": "#9a4a26", "lake": "#35617f", "moss": "#6d7f45"}
-DARK = {"pine": "#86bb9c", "clay": "#d98c6c", "lake": "#7fa8c4", "moss": "#8d9c58"}
+POSTER = {"red": "#e0452c", "rust": "#b85236", "sage": "#7fae8e", "amber": "#e0a03a"}
 
-bad = report("warmday", "#efe7d6", "#2c2a23", LIGHT)
-bad += report("night", "#0f1a18", "#f3ece0", DARK)
+bad = report("poster", "#100c0b", "#f2e8dd", POSTER)
+# bone is the neutral slot: near the text colour on purpose, so it is checked
+# for contrast rather than for being a hue of its own
+print("=== bone, the neutral ===")
+c = contrast("#e8dcc8", "#100c0b")
+print("  bone     #e8dcc8   %5.2f:1 on the plate   %s" % (c, "ok" if c >= 4.5 else "TOO LOW"))
+bad += c < 4.5
 sys.exit(1 if bad else 0)
