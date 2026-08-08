@@ -10,7 +10,7 @@ SFX = suffix(T)
 # point at now comes from tools/palette.py, which is checked rather than picked.
 BG0 = T["bg"]; PANEL = T["panel"]; GRID = T["grid"]; LINE = T["line"]
 TXT = T["txt"]; MUT = T["mut"]
-CY = T["c1"]; RED = T["c2"]; VIO = T["c3"]; GRN = T["c4"]; AMB = T["c4"]
+CY = T["c1"]; RED = T["c2"]; VIO = T["c3"]; GRN = T["c4"]; AMB = T["tint"]
 MONO = MONO_STACK
 CX, CYY, RMAX, DUR = 988.0, 172.0, 130.0, 4.0
 

@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 306 56" width="306" height="56" fill="none" role="img" aria-label="PORTFOLIO — abdu7rahman.github.io">
-<rect x="0.5" y="0.5" width="305" height="55" rx="3" fill="#f6efe0" stroke="#d6cdbc"/>
-<rect x="0.5" y="0.5" width="3.5" height="55" fill="#3f6b57"/>
-<g transform="translate(20 16) scale(1)"><circle cx="12" cy="12" r="8.3" fill="none" stroke="#3f6b57" stroke-width="1.7"/><path fill="none" stroke="#3f6b57" stroke-width="1.7" d="M3.7 12h16.6M12 3.7c2.2 2.4 3.3 5.3 3.3 8.3s-1.1 5.9-3.3 8.3c-2.2-2.4-3.3-5.3-3.3-8.3S9.8 6.1 12 3.7Z"/></g>
-<text x="58" y="24" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#2c2a23">PORTFOLIO</text>
-<text x="58" y="40" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="#565f5a">abdu7rahman.github.io</text>
-<path d="M293 6H300V13" stroke="#3f6b57" stroke-width="1.4" opacity="0.8"/>
+<rect x="0.5" y="0.5" width="305" height="55" rx="3" fill="#1a1412" stroke="#33241f"/>
+<rect x="0.5" y="0.5" width="3.5" height="55" fill="#e0452c"/>
+<g transform="translate(20 16) scale(1)"><circle cx="12" cy="12" r="8.3" fill="none" stroke="#e0452c" stroke-width="1.7"/><path fill="none" stroke="#e0452c" stroke-width="1.7" d="M3.7 12h16.6M12 3.7c2.2 2.4 3.3 5.3 3.3 8.3s-1.1 5.9-3.3 8.3c-2.2-2.4-3.3-5.3-3.3-8.3S9.8 6.1 12 3.7Z"/></g>
+<text x="58" y="24" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#f2e8dd">PORTFOLIO</text>
+<text x="58" y="40" font-family="'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="#a8988a">abdu7rahman.github.io</text>
+<path d="M293 6H300V13" stroke="#e0452c" stroke-width="1.4" opacity="0.8"/>
 </svg>

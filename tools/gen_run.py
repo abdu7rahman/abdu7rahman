@@ -23,7 +23,7 @@ OUT = os.path.join(ASSETS, "run%s.svg" % suffix(THEME))
 
 BG = THEME["bg"]; PANEL = THEME["panel"]; GRID = THEME["grid"]; LINE = THEME["line"]
 TXT = THEME["txt"]; MUT = THEME["mut"]
-CY = THEME["c1"]; VIO = THEME["c3"]; GRN = THEME["c4"]; AMB = THEME["c4"]
+CY = THEME["c1"]; VIO = THEME["c3"]; GRN = THEME["c4"]; AMB = THEME["tint"]
 MONO = MONO_STACK
 
 COLS, ROWS = 78, 46
