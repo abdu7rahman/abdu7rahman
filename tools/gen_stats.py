@@ -10,13 +10,13 @@ SFX = suffix(T)
 # point at now comes from tools/palette.py, which is checked rather than picked.
 BG0 = T["bg"]; PANEL = T["panel"]; GRID = T["grid"]; LINE = T["line"]
 TXT = T["txt"]; MUT = T["mut"]
-CY = T["c1"]; RED = T["c2"]; VIO = T["c3"]; GRN = T["c4"]; AMB = T["c4"]
+CY = T["c1"]; RED = T["c2"]; VIO = T["c3"]; GRN = T["c4"]; AMB = T["tint"]
 MONO = MONO_STACK
 # Five slices need five slots but only four hues clear every gate, so the
 # fifth is the fill tint and the order keeps it away from clay, which it is
 # a lightness variant of. Adjacent pairs are what a stacked bar has to
 # separate; tools/check_palette.py checks them.
-SER = [T["c2"], T["c1"], T["c3"], T["c4"], T["tint"]]
+SER = [T["c1"], T["c3"], T["c4"], T["c2"], T["tint"]]
 OTHER = T["mut"]
 BAR = T["c1"]                     # commit cadence is a single series
 W,H=1200,300; PY=20; PH=260
