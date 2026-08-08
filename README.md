@@ -13,7 +13,7 @@
 
 <br>
 
-[<img src="assets/link-demo.svg" alt="Run my planners — A*, Theta* and RRT, live in your browser" height="50">](https://abdu7rahman.github.io/demo.html)
+[<img src="assets/link-demo.svg" alt="Run my robots — search a map, chase a cursor, reach into the cell" height="50">](https://abdu7rahman.github.io/demo.html)
 
 </div>
 
@@ -92,7 +92,7 @@ across 4 categories<br>
 
 <tr><td valign="top">
 
-**[Dynamic Bin Picking + Reactive Replanning](https://github.com/abdu7rahman/reactive-replanning-ur12e)**
+**[Dynamic Bin Picking + Reactive Replanning](https://github.com/abdu7rahman/reactive-replanning-ur12e)** · [run the detector](https://abdu7rahman.github.io/demo.html#reach)
 
 `ROS 2 Jazzy` `MoveIt 2` `BIT*`
 `RealSense D435i` `OctoMap`
@@ -113,7 +113,7 @@ blind within **11 cm**
 
 <tr><td valign="top">
 
-**[Reactive Autonomous Nav Stack](https://github.com/abdu7rahman/reactive_autonomous_nav)**
+**[Reactive Autonomous Nav Stack](https://github.com/abdu7rahman/reactive_autonomous_nav)** · [drive it](https://abdu7rahman.github.io/demo.html#drive)
 
 `ROS 2 Jazzy` `TurtleBot4` `C++`
 `nav2_costmap_2d`
@@ -235,7 +235,9 @@ code doesn't skew the split.
 > runs both searches, and renders the expansion order into the SVG above. The node counts and
 > millisecond figures are whatever the run produced —
 > [the generator is here](tools/gen_run.py).
-> Want to drive it yourself? [Draw your own map](https://abdu7rahman.github.io/demo.html).
+> Want to drive it yourself? [Three of these repos run in your browser](https://abdu7rahman.github.io/demo.html) —
+> search a map you draw, chase a cursor with the DWA controller while you throw obstacles at it, or
+> reach into the UR12e's cell and find where its detector stops seeing you.
 
 <img src="assets/divider.svg" alt="" width="100%">
 
