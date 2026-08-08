@@ -92,7 +92,7 @@ across 4 categories<br>
 
 <tr><td valign="top">
 
-**[Dynamic Bin Picking + Reactive Replanning](https://github.com/abdu7rahman/reactive-replanning-ur12e)** · [run the detector](https://abdu7rahman.github.io/demo.html#reach)
+**[Reactive Replanning on a UR12e](https://github.com/abdu7rahman/reactive-replanning-ur12e)** · [run the detector](https://abdu7rahman.github.io/demo.html#reach)
 
 `ROS 2 Jazzy` `MoveIt 2` `BIT*`
 `RealSense D435i` `OctoMap`
