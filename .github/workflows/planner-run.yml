@@ -33,15 +33,21 @@ jobs:
 
       - run: pip install --quiet numpy
 
+      - name: Check the palette still holds
+        run: python3 tools/check_palette.py
+
       - name: Run the planners and render the replay
-        run: python3 tools/gen_run.py
+        run: |
+          SEED=$RANDOM
+          python3 tools/gen_run.py "$SEED"
+          PLATE_THEME=night python3 tools/gen_run.py "$SEED"
 
       - name: Commit if it changed
         run: |
-          if [[ -n "$(git status --porcelain assets/run.svg)" ]]; then
+          if [[ -n "$(git status --porcelain assets/run.svg assets/run-night.svg)" ]]; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add assets/run.svg
+            git add assets/run.svg assets/run-night.svg
             git commit -m "chore(assets): refresh the planner run"
             git push
           else
