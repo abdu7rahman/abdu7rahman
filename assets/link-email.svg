@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 56" width="360" height="56" fill="none" role="img" aria-label="EMAIL — mohammedabdulr.1@northeastern.edu">
+<rect x="0.5" y="0.5" width="359" height="55" rx="3" fill="#0a0f16" stroke="#1b2634"/>
+<rect x="0.5" y="0.5" width="3.5" height="55" fill="#ff4d5e"/>
+<g transform="translate(20 16) scale(1)"><path fill="none" stroke="#ff4d5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M3.6 6.4h16.8v11.2H3.6z"/><path fill="none" stroke="#ff4d5e" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m3.9 7 8.1 5.4L20.1 7"/></g>
+<text x="58" y="24" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="12.5" font-weight="700" letter-spacing="1.6" fill="#e6edf3">EMAIL</text>
+<text x="58" y="40" font-family="ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="#7d8da1">mohammedabdulr.1@northeastern.edu</text>
+<path d="M347 6H354V13" stroke="#ff4d5e" stroke-width="1.4" opacity="0.8"/>
+</svg>
