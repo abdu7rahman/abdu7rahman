@@ -38,16 +38,17 @@ jobs:
 
       - name: Run the planners and render the replay
         run: |
+          # One invocation writes both themes from one search, so the light and
+          # dark plates are always the same map on the same seed.
           SEED=$RANDOM
           python3 tools/gen_run.py "$SEED"
-          
 
       - name: Commit if it changed
         run: |
-          if [[ -n "$(git status --porcelain assets/run.svg)" ]]; then
+          if [[ -n "$(git status --porcelain assets/run.svg assets/run-dark.svg)" ]]; then
             git config user.name  "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add assets/run.svg
+            git add assets/run.svg assets/run-dark.svg
             git commit -m "chore(assets): refresh the planner run"
             git push
           else
