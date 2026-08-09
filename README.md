@@ -8,15 +8,15 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <img src="assets/hero.svg" width="100%" alt="Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California.">
+  <img src="assets/hero.svg" width="100%" alt="Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation, and the bringup that makes them run.">
 </picture>
 
 <br>
 
-<a href="https://abdu7rahman.github.io/demo.html"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-demo-dark.svg"><img src="assets/link-demo.svg" height="44" alt="Run my robots in the browser"></picture></a>
-<a href="https://abdu7rahman.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-site-dark.svg"><img src="assets/link-site.svg" height="44" alt="Portfolio — abdu7rahman.github.io"></picture></a>
-<a href="https://linkedin.com/in/abdu7rahman"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-linkedin-dark.svg"><img src="assets/link-linkedin.svg" height="44" alt="LinkedIn — in/abdu7rahman"></picture></a>
-<a href="mailto:mohammedabdulr.1@northeastern.edu"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-dark.svg"><img src="assets/link-email.svg" height="44" alt="Email — mohammedabdulr.1@northeastern.edu"></picture></a>
+<a href="https://abdu7rahman.github.io/demo.html"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-demo-dark.svg"><img src="assets/link-demo.svg" height="48" alt="Run my robots in the browser"></picture></a>
+<a href="https://abdu7rahman.github.io/"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-site-dark.svg"><img src="assets/link-site.svg" height="48" alt="Portfolio — abdu7rahman.github.io"></picture></a>
+<a href="https://linkedin.com/in/abdu7rahman"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-linkedin-dark.svg"><img src="assets/link-linkedin.svg" height="48" alt="LinkedIn — in/abdu7rahman"></picture></a>
+<a href="mailto:mohammedabdulr.1@northeastern.edu"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-dark.svg"><img src="assets/link-email.svg" height="48" alt="Email — mohammedabdulr.1@northeastern.edu"></picture></a>
 
 </div>
 
@@ -280,7 +280,7 @@ authorship; the language mix excludes two repos built on forked upstreams (`K.A.
 
 **Send a goal pose**
 
-<a href="mailto:mohammedabdulr.1@northeastern.edu"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-dark.svg"><img src="assets/link-email.svg" height="44" alt="Email — mohammedabdulr.1@northeastern.edu"></picture></a>
+<a href="mailto:mohammedabdulr.1@northeastern.edu"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/link-email-dark.svg"><img src="assets/link-email.svg" height="48" alt="Email — mohammedabdulr.1@northeastern.edu"></picture></a>
 
 <br>
 
