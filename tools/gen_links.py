@@ -57,15 +57,17 @@ def button(name, glyph, label, alt, solid=False, pad=22):
     lw = len(label) * EM_UPPER * 13.5
     w = int(pad + 24 + 10 + lw + pad)
 
+    # The one emphasised button is solid ink rather than a colour: on a page
+    # with no accent, weight is what makes something primary.
     ink = T["bg"] if solid else T["txt"]
-    accent = T["bg"] if solid else T["c1"]
-    fill = T["c1"] if solid else T["sunk"]
-    stroke = T["c1"] if solid else T["line"]
+    accent = T["bg"] if solid else T["mut"]
+    fill = T["txt"] if solid else T["sunk"]
+    stroke = T["txt"] if solid else T["line"]
 
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}"'
          f' height="{h}" fill="none" role="img" aria-label="{esc(alt)}">',
          f'<title>{esc(alt)}</title>',
-         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="10" '
+         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="6" '
          f'fill="{fill}" stroke="{stroke}"/>',
          f'<g transform="translate({pad} {(h-24)//2})">{GLYPH[glyph].format(c=accent)}</g>',
          f'<text x="{pad + 24 + 10 + lw / 2:.0f}" y="{h//2 + 5}" font-family="{SANS}" '
