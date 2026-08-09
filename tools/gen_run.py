@@ -151,19 +151,28 @@ def panel(T, ox, title, sub, accent, g, start, goal, path, explored, ms, dur):
     for i, chunk in enumerate(fr):
         d = "".join(f"M{c*CELL:.1f} {r*CELL:.1f}h{CELL:.1f}v{CELL:.1f}h-{CELL:.1f}z"
                     for r, c in chunk)
+        # 0.16 was the settled opacity when this was a saturated accent. A
+        # neutral at that opacity is invisible, and the difference between the
+        # two wavefronts -- 376 cells against 163 -- is the only thing this
+        # plate exists to show, so it has to be the second-strongest mark here
+        # after the path.
         out.append(f'<path class="wave" style="animation-delay:{i*per:.2f}s" d="{d}" '
-                   f'fill="{accent}" opacity="0.16"/>')
+                   f'fill="{accent}" opacity="0.7"/>')
     pts = " ".join(f"{c*CELL+CELL/2:.1f},{r*CELL+CELL/2:.1f}" for r, c in path)
     length = sum(math.hypot((path[i+1][0]-path[i][0])*CELL, (path[i+1][1]-path[i][1])*CELL)
                  for i in range(len(path)-1)) + 4
     out.append(f'<polyline class="path" style="--len:{length:.0f}" points="{pts}" fill="none" '
-               f'stroke="{T["c3"]}" stroke-width="2.6" stroke-linecap="round" '
+               f'stroke="{T["txt"]}" stroke-width="2.2" stroke-linecap="round" '
                f'stroke-linejoin="round" stroke-dasharray="{length:.0f}" '
                f'stroke-dashoffset="0"/>')
-    for rc, col, lab in ((start, T["c1"], "start"), (goal, T["c3"], "goal")):
-        x, y = rc[1] * CELL + CELL / 2, rc[0] * CELL + CELL / 2
-        out.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5" fill="{col}" '
-                   f'stroke="{T["sunk"]}" stroke-width="2"><title>{lab}</title></circle>')
+    # Start is filled, goal is a ring. On a monochrome plate the two markers
+    # have to differ by shape, because there is no second hue to spend on them.
+    sx, sy = start[1] * CELL + CELL / 2, start[0] * CELL + CELL / 2
+    gx, gy = goal[1] * CELL + CELL / 2, goal[0] * CELL + CELL / 2
+    out.append(f'<circle cx="{sx:.1f}" cy="{sy:.1f}" r="4.5" fill="{T["txt"]}" '
+               f'stroke="{T["sunk"]}" stroke-width="2"><title>start</title></circle>')
+    out.append(f'<circle cx="{gx:.1f}" cy="{gy:.1f}" r="4.5" fill="{T["sunk"]}" '
+               f'stroke="{T["txt"]}" stroke-width="2.4"><title>goal</title></circle>')
     out.append(f'<text x="0" y="{ROWS*CELL+26}" font-family="{MONO}" font-size="10.5" '
                f'letter-spacing="0.2" fill="{T["mut"]}">{len(explored):,} expanded  ·  '
                f'{len(path)} waypoints  ·  {ms:.1f} ms</text>')
@@ -195,37 +204,28 @@ if __name__ == "__main__":
              f'{len(tp)} waypoints in {t_ms:.1f} ms, on the same map.">',
              '<title>Tonight&#8217;s search</title>',
              f'''<defs>
-<linearGradient id="plate" x1="0" y1="0" x2="0.25" y2="1">
-  <stop offset="0" stop-color="{T['panel']}"/><stop offset="1" stop-color="{T['bg']}"/>
-</linearGradient>
-<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="{T['edge']}" stop-opacity="0"/>
-  <stop offset="0.3" stop-color="{T['edge']}" stop-opacity="0.75"/>
-  <stop offset="1" stop-color="{T['edge']}" stop-opacity="0"/>
-</linearGradient>
 <style>
   @media (prefers-reduced-motion: no-preference) {{
     .wave {{ animation: sweep {DUR}s {EASE_CSS} both }}
     .path {{ animation: draw {DUR}s {EASE_CSS} both }}
-    @keyframes sweep {{ from {{ opacity: 0 }} 25% {{ opacity: 0.42 }} }}
+    @keyframes sweep {{ from {{ opacity: 0 }} 25% {{ opacity: 1 }} }}
     @keyframes draw  {{ from {{ stroke-dashoffset: var(--len) }}
                         62% {{ stroke-dashoffset: var(--len) }} }}
   }}
 </style>
 </defs>''',
-             f'<rect width="{W:.0f}" height="{H:.0f}" rx="14" fill="url(#plate)"/>',
-             f'<rect x="0.5" y="0.5" width="{W-1:.0f}" height="{H-1:.0f}" rx="13.5" '
+             f'<rect width="{W:.0f}" height="{H:.0f}" rx="6" fill="{T["bg"]}"/>',
+             f'<rect x="0.5" y="0.5" width="{W-1:.0f}" height="{H-1:.0f}" rx="6" '
              f'stroke="{T["line"]}"/>',
-             f'<path d="M28 1H{W-28:.0f}" stroke="url(#edge)" stroke-width="1.2"/>',
              f'<text x="28" y="38" font-family="{SANS}" font-size="17" font-weight="650" '
              f'letter-spacing="-0.3" fill="{T["txt"]}">Same map, two planners</text>',
              f'<text x="28" y="60" font-family="{SANS}" font-size="12" '
              f'fill="{T["mut"]}">seed {used} · regenerated nightly · the real search, '
              f'replayed in the order the planner expanded it</text>']
-        s.append(panel(T, 28, "A*", "8-connected, octile heuristic", T["c1"],
+        s.append(panel(T, 28, "A*", "8-connected, octile heuristic", T["ramp"][4],
                        g, start, goal, ap, ae, a_ms, DUR))
         s.append(panel(T, 28 + COLS * CELL + 52, "Theta*",
-                       "any-angle, line-of-sight reparenting", T["c4"],
+                       "any-angle, line-of-sight reparenting", T["ramp"][4],
                        g, start, goal, tp, te, t_ms, DUR))
         s.append('</svg>')
         open(out, "w").write("\n".join(s))
