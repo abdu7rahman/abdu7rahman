@@ -1,0 +1,3 @@
+# tools/preview.py renders README.md to a page that approximates how GitHub
+# will show it. Useful before pushing, not worth committing.
+build/
