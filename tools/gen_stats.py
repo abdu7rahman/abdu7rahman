@@ -1,128 +1,201 @@
-import json, math, os, random, sys
+#!/usr/bin/env python3
+"""Two charts of things that were counted rather than claimed.
+
+Left: commits per month, filtered to my own authorship. Right: the source-byte
+mix across my own repos, with forked upstreams excluded so vendored code does
+not skew the split. Both read from tools/data/*.json, which is generated from
+the git history rather than typed in.
+
+Two things changed here beyond the palette.
+
+The bars used to be drawn at zero and animated up with SMIL fill="freeze". That
+means the settled state of the file -- what a reader sees with animation off,
+and what any renderer that does not run SMIL shows -- was two empty charts. Now
+they are authored at full size and the animation grows them from zero only when
+the reader has not asked for less motion, so switching it off leaves the charts
+correct instead of blank.
+
+And the labels are sans at the tracking their size wants, not mono at 2.2px
+everywhere. Numbers stay mono, because a column of figures should line up.
+
+    python3 tools/gen_stats.py light
+    python3 tools/gen_stats.py dark
+"""
+import json
+import os
+import sys
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from palette import WARMDAY, NIGHT, MONO as MONO_STACK, suffix
+from palette import EASE_CSS, MONO, SANS, theme_from_argv, suffix
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
 os.makedirs(OUT, exist_ok=True)
-T = NIGHT if (len(sys.argv) > 1 and sys.argv[1] == "night") else WARMDAY
+
+T = theme_from_argv(sys.argv)
 SFX = suffix(T)
-# The old names are kept so the drawing code below reads unchanged; what they
-# point at now comes from tools/palette.py, which is checked rather than picked.
-BG0 = T["bg"]; PANEL = T["panel"]; GRID = T["grid"]; LINE = T["line"]
-TXT = T["txt"]; MUT = T["mut"]
-CY = T["c1"]; RED = T["c2"]; VIO = T["c3"]; GRN = T["c4"]; AMB = T["tint"]
-MONO = MONO_STACK
-# Five slices need five slots but only four hues clear every gate, so the
-# fifth is the fill tint and the order keeps it away from clay, which it is
-# a lightness variant of. Adjacent pairs are what a stacked bar has to
-# separate; tools/check_palette.py checks them.
-SER = [T["c1"], T["c3"], T["c4"], T["c2"], T["tint"]]
-OTHER = T["mut"]
-BAR = T["c1"]                     # commit cadence is a single series
-W,H=1200,300; PY=20; PH=260
-AX,AW=20,738; BX,BW=770,410
+
+# Six slices need six slots and four hues clear every gate, so the last two are
+# the neutral tint and the muted grey. The order keeps the two warm hues apart,
+# since adjacent pairs are what a stacked bar has to separate.
+SER = [T["c1"], T["c3"], T["c4"], T["c2"], T["tint"], T["mut"]]
+
+W, H = 1000, 300
+PY, PH = 18, 264
+AX, AW = 18, 616
+BX, BW = 648, 334
 
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 months = json.load(open(os.path.join(DATA, "mine.json")))["months"]
 lang = json.load(open(os.path.join(DATA, "lang.json")))
-def mseq(a,b):
-    y,m=map(int,a.split('-')); Y,M=map(int,b.split('-')); out=[]
-    while (y,m)<=(Y,M):
-        out.append(f"{y:04d}-{m:02d}"); m+=1
-        if m==13: y,m=y+1,1
+
+
+def mseq(a, b):
+    y, m = map(int, a.split('-'))
+    Y, M = map(int, b.split('-'))
+    out = []
+    while (y, m) <= (Y, M):
+        out.append(f"{y:04d}-{m:02d}")
+        m += 1
+        if m == 13:
+            y, m = y + 1, 1
     return out
-keys=mseq(min(months),max(months))
-vals=[months.get(k,0) for k in keys]
-tot=sum(vals); act=sum(1 for v in vals if v>0)
-nz=sorted(v for v in vals if v>0); med=(nz[len(nz)//2-1]+nz[len(nz)//2])/2 if len(nz)%2==0 else nz[len(nz)//2]
-peak=max(vals); peak_i=vals.index(peak); last_i=max(i for i,v in enumerate(vals) if v>0)
 
-L=lang['lang']; ltot=sum(L.values())
-top=sorted(L.items(), key=lambda kv:-kv[1])[:5]
-other=ltot-sum(v for _,v in top)
-segs=[(k, 100*v/ltot) for k,v in top]+[("Other", 100*other/ltot)]
-cols=SER+[OTHER]
 
-s=[f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" fill="none" role="img" '
-   f'aria-label="Two charts. Left: monthly commit cadence, {tot} commits authored across {len(keys)} months from {keys[0]} to {keys[-1]}, peaking at {peak} in one month, median {med:.0f} in active months. '
-   f'Right: source-byte mix across {lang["repos"]} repositories - ' + ", ".join(f"{k} {p:.1f} percent" for k,p in segs) + '.">',
-   '<title>Repository telemetry</title>',
-   f'''<defs>
-<pattern id="g3" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" stroke="{GRID}" stroke-width="1"/></pattern>
-<style>.m{{font-family:{MONO}}} .t{{font-size:11.5px;letter-spacing:2.2px;font-weight:700}}
- .sub{{font-size:9px;letter-spacing:1.3px}} .met{{font-size:9px;letter-spacing:1.5px}}
- .ax{{font-size:9.5px;letter-spacing:1.1px}} .lg{{font-size:9.5px;letter-spacing:0.9px}}</style>
+keys = mseq(min(months), max(months))
+vals = [months.get(k, 0) for k in keys]
+tot = sum(vals)
+act = sum(1 for v in vals if v > 0)
+nz = sorted(v for v in vals if v > 0)
+med = (nz[len(nz) // 2 - 1] + nz[len(nz) // 2]) / 2 if len(nz) % 2 == 0 else nz[len(nz) // 2]
+peak = max(vals)
+peak_i = vals.index(peak)
+
+L = lang['lang']
+ltot = sum(L.values())
+top = sorted(L.items(), key=lambda kv: -kv[1])[:5]
+other = ltot - sum(v for _, v in top)
+segs = [(k, 100 * v / ltot) for k, v in top] + [("Other", 100 * other / ltot)]
+
+ALT = ("Two charts. Left: monthly commit cadence, %d commits authored across %d "
+       "months from %s to %s, %d active months, median %.0f, peak %d. Right: "
+       "source-byte mix across %s repositories - %s."
+       % (tot, len(keys), keys[0], keys[-1], act, med, peak, lang["repos"],
+          ", ".join("%s %.1f percent" % (k, p) for k, p in segs)))
+
+s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}"'
+     f' height="{H}" fill="none" role="img" aria-label="{ALT}">',
+     '<title>Counted, not claimed</title>',
+     f'''<defs>
+<linearGradient id="plate" x1="0" y1="0" x2="0.3" y2="1">
+  <stop offset="0" stop-color="{T['panel']}"/><stop offset="1" stop-color="{T['bg']}"/>
+</linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="{T['edge']}" stop-opacity="0"/>
+  <stop offset="0.3" stop-color="{T['edge']}" stop-opacity="0.75"/>
+  <stop offset="1" stop-color="{T['edge']}" stop-opacity="0"/>
+</linearGradient>
+<filter id="lift" x="-8%" y="-20%" width="116%" height="150%">
+  <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="{T['shadow']}"
+                flood-opacity="{0.08 if T['name'] == 'light' else 0.42}"/>
+</filter>
+<style>
+  text {{ font-family:{SANS} }}
+  .mono {{ font-family:{MONO} }}
+  .head {{ font-size:15px; font-weight:600; letter-spacing:-0.1px }}
+  .sub  {{ font-size:11px; font-weight:400; letter-spacing:0px }}
+  .ax   {{ font-size:10.5px; font-weight:500; letter-spacing:0.2px }}
+  .lg   {{ font-size:11.5px; font-weight:450; letter-spacing:0px }}
+  @media (prefers-reduced-motion: no-preference) {{
+    /* Authored settled. These grow from nothing only when motion is welcome;
+       with it off the charts are already the right size. */
+    .bar {{ animation: grow 620ms {EASE_CSS} both; transform-origin: center bottom }}
+    .seg {{ animation: wide 700ms {EASE_CSS} both }}
+    @keyframes grow {{ from {{ transform: scaleY(0) }} }}
+    @keyframes wide {{ from {{ transform: scaleX(0) }} }}
+  }}
+</style>
 </defs>''',
-   f'<rect width="{W}" height="{H}" fill="{BG0}"/>']
+     f'<rect width="{W}" height="{H}" fill="{T["bg"]}"/>']
 
-def frame(x,w,idx,title,sub,metric,accent):
-    return "\n".join([f'<rect x="{x}" y="{PY}" width="{w}" height="{PH}" rx="10" fill="{PANEL}" stroke="{LINE}"/>',
-      f'<rect x="{x}" y="{PY}" width="{w}" height="{PH}" rx="10" fill="url(#g3)" opacity="0.5"/>',
-      f'<path d="M{x+10} {PY}h58" stroke="{accent}" stroke-width="2"/>',
-      f'<text class="m t" x="{x+16}" y="{PY+30}" fill="{accent}">{idx}</text>',
-      f'<text class="m t" x="{x+44}" y="{PY+30}" fill="{TXT}">{title}</text>',
-      f'<text class="m sub" x="{x+16}" y="{PY+48}" fill="{MUT}">{sub}</text>',
-      f'<path d="M{x+16} {PY+PH-30}h{w-32}" stroke="{LINE}"/>',
-      f'<text class="m met" x="{x+16}" y="{PY+PH-14}" fill="{accent}" opacity="0.9">{metric}</text>'])
 
-# ---------------- 04 commit cadence (single series -> no legend)
-s.append(frame(AX,AW,"06","COMMIT CADENCE",
-   f'{tot} commits authored · {keys[0]} → {keys[-1]} · per month',
-   f'{act} ACTIVE MONTHS · MEDIAN {med:.0f} · PEAK {peak}', CY))
-x0,x1 = AX+40, AX+AW-18
-yb, yt = PY+208, PY+92
-pitch=(x1-x0)/len(keys); bw=min(9.0, pitch-2.0)
-ymax=50
-for gv in (0,25,50):
-    gy=yb-(gv/ymax)*(yb-yt)
-    s.append(f'<path d="M{x0} {gy:.1f}H{x1:.0f}" stroke="{LINE}" stroke-dasharray="{"none" if gv==0 else "2 5"}" opacity="{1 if gv==0 else 0.8}"/>')
-    s.append(f'<text class="m ax" x="{x0-8}" y="{gy+3:.1f}" fill="{MUT}" text-anchor="end">{gv}</text>')
-for i,(k,v) in enumerate(zip(keys,vals)):
-    if v==0: continue
-    bx=x0+i*pitch+(pitch-bw)/2; bh=(v/ymax)*(yb-yt); r=min(4.0,bw/2,bh)
-    s.append(f'<path d="M{bx:.1f} {yb}v{-(bh-r):.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {-r:.1f}h{bw-2*r:.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {r:.1f}V{yb}z" fill="{BAR}">'
-             f'<animate attributeName="opacity" values="0;1" dur="0.5s" begin="{0.5+i*0.018:.2f}s" fill="freeze"/></path>')
-for i,lab in ((peak_i,f"{peak}"),(last_i,f"{vals[last_i]}")):
-    if i==peak_i or vals[i]>=12:
-        bx=x0+i*pitch+pitch/2; bh=(vals[i]/ymax)*(yb-yt)
-        s.append(f'<text class="m ax" x="{bx:.1f}" y="{yb-bh-7:.1f}" fill="{TXT}" text-anchor="middle">{lab}</text>')
-seen=set()
-for i,k in enumerate(keys):
-    y,m=k.split('-')
-    if m=='01' and y not in seen:
-        seen.add(y); tx=x0+i*pitch+pitch/2
-        s.append(f'<path d="M{tx:.1f} {yb}v5" stroke="{LINE}"/>')
-        s.append(f'<text class="m ax" x="{tx:.1f}" y="{yb+17}" fill="{MUT}" text-anchor="middle">{y}</text>')
-if keys[0].split('-')[1] != '01':
-    s.append(f'<path d="M{x0+pitch/2:.1f} {yb}v5" stroke="{LINE}"/>')
-    s.append(f'<text class="m ax" x="{x0+pitch/2:.1f}" y="{yb+17}" fill="{MUT}" text-anchor="middle">{keys[0].split("-")[0]}</text>')
-s.append(f'<text class="m ax" x="{x0}" y="{yt-8}" fill="{MUT}">commits / month</text>')
+def frame(x, w, title, sub, accent):
+    return "\n".join([
+        f'<rect x="{x}" y="{PY}" width="{w}" height="{PH}" rx="14" '
+        f'fill="url(#plate)" filter="url(#lift)"/>',
+        f'<rect x="{x}.5" y="{PY}.5" width="{w-1}" height="{PH-1}" rx="13.5" '
+        f'stroke="{T["line"]}"/>',
+        f'<path d="M{x+24} {PY}H{x+w-24}" stroke="url(#edge)" stroke-width="1.2"/>',
+        f'<circle cx="{x+26}" cy="{PY+30}" r="3.5" fill="{accent}"/>',
+        f'<text class="head" x="{x+38}" y="{PY+34}" fill="{T["txt"]}">{title}</text>',
+        f'<text class="sub" x="{x+26}" y="{PY+56}" fill="{T["mut"]}">{sub}</text>'])
 
-# ---------------- 05 source mix (stacked share bar + legend)
-s.append(frame(BX,BW,"07","SOURCE MIX",
-   f'bytes tracked across {lang["repos"]} own repos', "PYTHON + C++ ON ROS 2 · URDF/XACRO · CMAKE", VIO))
-sx0,sw = BX+16, BW-32
-sy, sh = PY+84, 28
-GAP=2.0
-cur=sx0
-for i,((name,pct),c) in enumerate(zip(segs,cols)):
-    w=sw*pct/100 - (GAP if i<len(segs)-1 else 0)
-    rx = 4 if (i==0 or i==len(segs)-1) else 0
-    s.append(f'<rect x="{cur:.1f}" y="{sy}" width="{max(1,w):.1f}" height="{sh}" rx="{rx}" fill="{c}">'
-             f'<animate attributeName="width" values="0;{max(1,w):.1f}" dur="0.8s" begin="{0.3+i*0.09:.2f}s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>')
-    if i<4 and w>52:
-        s.append(f'<text class="m ax" x="{cur+w/2:.1f}" y="{sy+sh/2+3.4:.1f}" fill="{PANEL}" text-anchor="middle" opacity="0.95">{pct:.1f}%</text>')
-    cur+=w+GAP
-lx=[BX+16, BX+16+196]
-for i,((name,pct),c) in enumerate(zip(segs,cols)):
-    col,row=i//3,i%3
-    ex,ey = lx[col], PY+142+row*24
-    s.append(f'<rect x="{ex}" y="{ey-8}" width="10" height="10" rx="2.5" fill="{c}"/>')
-    s.append(f'<text class="m lg" x="{ex+17}" y="{ey}" fill="{TXT}">{name}</text>')
-    s.append(f'<text class="m lg" x="{ex+172}" y="{ey}" fill="{MUT}" text-anchor="end">{pct:.1f}%</text>')
-s.append(f'<text class="m ax" x="{BX+16}" y="{PY+214}" fill="{MUT}" opacity="0.85">{ltot/1048576:.2f} MiB tracked  ·  forked upstreams excluded</text>')
+
+# ── commits per month ─────────────────────────────────────────────────────
+s.append(frame(AX, AW, "Commit cadence",
+               f'{tot} commits authored · {keys[0]} to {keys[-1]} · '
+               f'{act} active months · median {med:.0f} · peak {peak}',
+               T["c1"]))
+x0, x1 = AX + 46, AX + AW - 22
+yb, yt = PY + 214, PY + 92
+pitch = (x1 - x0) / len(keys)
+bw = min(9.0, pitch - 2.0)
+ymax = 50
+for gv in (0, 25, 50):
+    gy = yb - (gv / ymax) * (yb - yt)
+    s.append(f'<path d="M{x0} {gy:.1f}H{x1:.0f}" stroke="{T["line"]}" '
+             f'stroke-dasharray="{"none" if gv == 0 else "2 5"}"/>')
+    s.append(f'<text class="mono ax" x="{x0-10}" y="{gy+3.5:.1f}" fill="{T["mut"]}" '
+             f'text-anchor="end">{gv}</text>')
+for i, (k, v) in enumerate(zip(keys, vals)):
+    if v == 0:
+        continue
+    bx = x0 + i * pitch + (pitch - bw) / 2
+    bh = (v / ymax) * (yb - yt)
+    r = min(4.0, bw / 2, bh)
+    s.append(f'<path class="bar" style="animation-delay:{i*0.012:.2f}s" '
+             f'd="M{bx:.1f} {yb}v{-(bh-r):.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {-r:.1f}'
+             f'h{bw-2*r:.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {r:.1f}V{yb}z" fill="{T["c1"]}"/>')
+bx = x0 + peak_i * pitch + pitch / 2
+s.append(f'<text class="mono ax" x="{bx:.1f}" y="{yb-(peak/ymax)*(yb-yt)-8:.1f}" '
+         f'fill="{T["txt"]}" text-anchor="middle">{peak}</text>')
+seen = set()
+for i, k in enumerate(keys):
+    y, m = k.split('-')
+    if m == '01' and y not in seen:
+        seen.add(y)
+        tx = x0 + i * pitch + pitch / 2
+        s.append(f'<path d="M{tx:.1f} {yb}v5" stroke="{T["line"]}"/>')
+        s.append(f'<text class="mono ax" x="{tx:.1f}" y="{yb+19}" fill="{T["mut"]}" '
+                 f'text-anchor="middle">{y}</text>')
+s.append(f'<text class="ax" x="{x0}" y="{yt-10}" fill="{T["mut"]}">commits per month</text>')
+
+# ── source mix ────────────────────────────────────────────────────────────
+s.append(frame(BX, BW, "Source mix",
+               f'bytes across {lang["repos"]} own repos · forked upstreams excluded',
+               T["c4"]))
+sx0, sw = BX + 26, BW - 52
+sy, sh = PY + 78, 26
+GAP = 2.0
+cur = sx0
+for i, ((name, pct), c) in enumerate(zip(segs, SER)):
+    w = sw * pct / 100 - (GAP if i < len(segs) - 1 else 0)
+    rx = 4 if (i == 0 or i == len(segs) - 1) else 0
+    s.append(f'<rect class="seg" style="animation-delay:{0.06*i:.2f}s;'
+             f'transform-origin:{cur:.1f}px {sy}px" x="{cur:.1f}" y="{sy}" '
+             f'width="{max(1, w):.1f}" height="{sh}" rx="{rx}" fill="{c}"/>')
+    cur += w + GAP
+for i, ((name, pct), c) in enumerate(zip(segs, SER)):
+    col, row = i // 3, i % 3
+    ex, ey = [BX + 26, BX + 26 + 156][col], PY + 138 + row * 26
+    s.append(f'<rect x="{ex}" y="{ey-9}" width="11" height="11" rx="3" fill="{c}"/>')
+    s.append(f'<text class="lg" x="{ex+19}" y="{ey}" fill="{T["txt"]}">{name}</text>')
+    s.append(f'<text class="mono lg" x="{ex+138}" y="{ey}" fill="{T["mut"]}" '
+             f'text-anchor="end">{pct:.1f}%</text>')
+s.append(f'<text class="ax" x="{BX+26}" y="{PY+232}" fill="{T["mut"]}">'
+         f'{ltot/1048576:.2f} MiB tracked</text>')
 s.append('</svg>')
-open(f"{OUT}/stats{SFX}.svg","w").write("\n".join(s))
-print("stats.svg", os.path.getsize(f"{OUT}/stats{SFX}.svg"))
-print("months",len(keys),"total",tot,"active",act,"median",med,"peak",peak)
-print("segs", [(k, round(p,1)) for k,p in segs])
+
+path = f"{OUT}/stats{SFX}.svg"
+open(path, "w").write("\n".join(s))
+print("stats%s.svg" % SFX, os.path.getsize(path), "bytes ·", tot, "commits ·",
+      len(segs), "slices")

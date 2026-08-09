@@ -15,19 +15,15 @@ import numpy as np
 REPO = "abdu7rahman/reactive_autonomous_nav"
 RAW = "https://raw.githubusercontent.com/" + REPO + "/main/reactive_autonomous_nav/"
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from palette import WARMDAY, NIGHT, MONO as MONO_STACK, suffix          # noqa: E402
+from palette import EASE_CSS, MONO, SANS, THEMES, suffix                # noqa: E402
 
-THEME = NIGHT if os.environ.get("PLATE_THEME") == "night" else WARMDAY
 ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
-OUT = os.path.join(ASSETS, "run%s.svg" % suffix(THEME))
-
-BG = THEME["bg"]; PANEL = THEME["panel"]; GRID = THEME["grid"]; LINE = THEME["line"]
-TXT = THEME["txt"]; MUT = THEME["mut"]
-CY = THEME["c1"]; VIO = THEME["c3"]; GRN = THEME["c4"]; AMB = THEME["tint"]
-MONO = MONO_STACK
 
 COLS, ROWS = 78, 46
-CELL = 7.2
+# Sized so two panels plus their gutters land on 1000, which is roughly the
+# width the README column gives an image. Authoring wider meant the browser
+# scaled the whole plate down and every label with it.
+CELL = 5.72
 
 
 def stub_ros():
@@ -122,13 +118,23 @@ def frames_of(explored, n=54):
     return [explored[i:i + step] for i in range(0, len(explored), step)]
 
 
-def panel(ox, title, sub, accent, g, start, goal, path, explored, ms, dur):
+def panel(T, ox, title, sub, accent, g, start, goal, path, explored, ms, dur):
+    """One planner's map.
+
+    Everything here is authored in its settled state -- the wavefront at its
+    resting opacity, the path fully drawn -- and the animation in the stylesheet
+    moves away from that and back. That ordering is what lets the whole thing be
+    switched off for a reader who asked for less motion without leaving them an
+    empty map and no path, which is what the SMIL version did.
+    """
     W = COLS * CELL
-    out = [f'<g transform="translate({ox} 92)">']
-    out.append(f'<text x="0" y="-30" font-family="{MONO}" font-size="12" font-weight="700" '
-               f'letter-spacing="2.2" fill="{accent}">{title}</text>')
-    out.append(f'<text x="0" y="-14" font-family="{MONO}" font-size="9" letter-spacing="1.2" fill="{MUT}">{sub}</text>')
-    out.append(f'<rect x="-2" y="-2" width="{W+4}" height="{ROWS*CELL+4}" fill="{PANEL}" stroke="{LINE}"/>')
+    out = [f'<g transform="translate({ox} 130)">']
+    out.append(f'<text x="0" y="-38" font-family="{SANS}" font-size="14.5" font-weight="600" '
+               f'letter-spacing="-0.1" fill="{T["txt"]}">{title}</text>')
+    out.append(f'<text x="0" y="-20" font-family="{SANS}" font-size="11" '
+               f'fill="{T["mut"]}">{sub}</text>')
+    out.append(f'<rect x="-6" y="-6" width="{W+12}" height="{ROWS*CELL+12}" rx="8" '
+               f'fill="{T["sunk"]}" stroke="{T["line"]}"/>')
     for r in range(ROWS):
         run = None
         for c in range(COLS + 1):
@@ -137,28 +143,29 @@ def panel(ox, title, sub, accent, g, start, goal, path, explored, ms, dur):
                 run = c
             elif not solid and run is not None:
                 out.append(f'<rect x="{run*CELL:.1f}" y="{r*CELL:.1f}" '
-                           f'width="{(c-run)*CELL:.1f}" height="{CELL:.1f}" fill="{LINE}"/>')
+                           f'width="{(c-run)*CELL:.1f}" height="{CELL:.1f}" '
+                           f'fill="{T["line"]}"/>')
                 run = None
     fr = frames_of(explored)
     per = dur * 0.62 / max(1, len(fr))
     for i, chunk in enumerate(fr):
-        d = "".join(f"M{c*CELL:.1f} {r*CELL:.1f}h{CELL:.1f}v{CELL:.1f}h-{CELL:.1f}z" for r, c in chunk)
-        out.append(f'<path d="{d}" fill="{accent}" opacity="0">'
-                   f'<animate attributeName="opacity" values="0;0.42;0.16" keyTimes="0;0.25;1" '
-                   f'dur="{dur}s" begin="{i*per:.2f}s" fill="freeze"/></path>')
+        d = "".join(f"M{c*CELL:.1f} {r*CELL:.1f}h{CELL:.1f}v{CELL:.1f}h-{CELL:.1f}z"
+                    for r, c in chunk)
+        out.append(f'<path class="wave" style="animation-delay:{i*per:.2f}s" d="{d}" '
+                   f'fill="{accent}" opacity="0.16"/>')
     pts = " ".join(f"{c*CELL+CELL/2:.1f},{r*CELL+CELL/2:.1f}" for r, c in path)
     length = sum(math.hypot((path[i+1][0]-path[i][0])*CELL, (path[i+1][1]-path[i][1])*CELL)
                  for i in range(len(path)-1)) + 4
-    out.append(f'<polyline points="{pts}" fill="none" stroke="{GRN}" stroke-width="2.6" '
-               f'stroke-linecap="round" stroke-linejoin="round" '
-               f'stroke-dasharray="{length:.0f}" stroke-dashoffset="{length:.0f}">'
-               f'<animate attributeName="stroke-dashoffset" values="{length:.0f};{length:.0f};0" '
-               f'keyTimes="0;{0.62};1" dur="{dur}s" begin="0s" fill="freeze"/></polyline>')
-    for rc, col in ((start, CY), (goal, GRN)):
-        x, y = rc[1]*CELL+CELL/2, rc[0]*CELL+CELL/2
-        out.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4.6" fill="{col}"/>')
-    out.append(f'<text x="0" y="{ROWS*CELL+18}" font-family="{MONO}" font-size="9" '
-               f'letter-spacing="1.2" fill="{MUT}">{len(explored):,} expanded  ·  '
+    out.append(f'<polyline class="path" style="--len:{length:.0f}" points="{pts}" fill="none" '
+               f'stroke="{T["c3"]}" stroke-width="2.6" stroke-linecap="round" '
+               f'stroke-linejoin="round" stroke-dasharray="{length:.0f}" '
+               f'stroke-dashoffset="0"/>')
+    for rc, col, lab in ((start, T["c1"], "start"), (goal, T["c3"], "goal")):
+        x, y = rc[1] * CELL + CELL / 2, rc[0] * CELL + CELL / 2
+        out.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5" fill="{col}" '
+                   f'stroke="{T["sunk"]}" stroke-width="2"><title>{lab}</title></circle>')
+    out.append(f'<text x="0" y="{ROWS*CELL+26}" font-family="{MONO}" font-size="10.5" '
+               f'letter-spacing="0.2" fill="{T["mut"]}">{len(explored):,} expanded  ·  '
                f'{len(path)} waypoints  ·  {ms:.1f} ms</text>')
     out.append("</g>")
     return "\n".join(out)
@@ -171,25 +178,58 @@ if __name__ == "__main__":
     seed = int(sys.argv[1]) if len(sys.argv) > 1 else int(time.time()) % 100000
     g, start, goal, (ap, ae, a_ms), (tp, te, t_ms), used = plan(seed)
 
-    W = COLS * CELL * 2 + 96
-    H = ROWS * CELL + 144
+    W = COLS * CELL * 2 + 108
+    H = ROWS * CELL + 188
     DUR = 9.0
-    s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.0f} {H:.0f}" width="{W:.0f}" height="{H:.0f}" '
-         f'fill="none" role="img" aria-label="A real planner run: A* expanded {len(ae)} nodes for a '
-         f'{len(ap)}-waypoint path in {a_ms:.1f} ms; Theta* expanded {len(te)} for {len(tp)} waypoints '
-         f'in {t_ms:.1f} ms, on the same map.">',
-         f'<title>A live run of the planners</title>',
-         f'<rect width="{W:.0f}" height="{H:.0f}" fill="{BG}"/>',
-         f'<text x="24" y="28" font-family="{MONO}" font-size="11.5" font-weight="700" letter-spacing="2.4" '
-         f'fill="{TXT}">SAME MAP, TWO PLANNERS</text>',
-         f'<text x="24" y="46" font-family="{MONO}" font-size="9.5" letter-spacing="1.6" fill="{MUT}">'
-         f'seed {used}  ·  regenerated daily  ·  this is the real search, replayed in expansion order</text>']
-    s.append(panel(24, "A*", "8-connected, octile heuristic", CY, g, start, goal, ap, ae, a_ms, DUR))
-    s.append(panel(24 + COLS*CELL + 48, "THETA*", "any-angle, line-of-sight reparenting", VIO,
-                   g, start, goal, tp, te, t_ms, DUR))
-    s.append('</svg>')
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    open(OUT, "w").write("\n".join(s))
+
+    # One search, both themes. Rendering them in separate processes meant two
+    # searches on two seeds, so the light and dark plates showed different maps
+    # and a reader switching theme saw the page change its own history.
+    os.makedirs(ASSETS, exist_ok=True)
+    for T in THEMES:
+        out = os.path.join(ASSETS, "run%s.svg" % suffix(T))
+        s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W:.0f} {H:.0f}" '
+             f'width="{W:.0f}" height="{H:.0f}" fill="none" role="img" '
+             f'aria-label="A real planner run: A* expanded {len(ae)} nodes for a '
+             f'{len(ap)}-waypoint path in {a_ms:.1f} ms; Theta* expanded {len(te)} for '
+             f'{len(tp)} waypoints in {t_ms:.1f} ms, on the same map.">',
+             '<title>Tonight&#8217;s search</title>',
+             f'''<defs>
+<linearGradient id="plate" x1="0" y1="0" x2="0.25" y2="1">
+  <stop offset="0" stop-color="{T['panel']}"/><stop offset="1" stop-color="{T['bg']}"/>
+</linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="{T['edge']}" stop-opacity="0"/>
+  <stop offset="0.3" stop-color="{T['edge']}" stop-opacity="0.75"/>
+  <stop offset="1" stop-color="{T['edge']}" stop-opacity="0"/>
+</linearGradient>
+<style>
+  @media (prefers-reduced-motion: no-preference) {{
+    .wave {{ animation: sweep {DUR}s {EASE_CSS} both }}
+    .path {{ animation: draw {DUR}s {EASE_CSS} both }}
+    @keyframes sweep {{ from {{ opacity: 0 }} 25% {{ opacity: 0.42 }} }}
+    @keyframes draw  {{ from {{ stroke-dashoffset: var(--len) }}
+                        62% {{ stroke-dashoffset: var(--len) }} }}
+  }}
+</style>
+</defs>''',
+             f'<rect width="{W:.0f}" height="{H:.0f}" rx="14" fill="url(#plate)"/>',
+             f'<rect x="0.5" y="0.5" width="{W-1:.0f}" height="{H-1:.0f}" rx="13.5" '
+             f'stroke="{T["line"]}"/>',
+             f'<path d="M28 1H{W-28:.0f}" stroke="url(#edge)" stroke-width="1.2"/>',
+             f'<text x="28" y="38" font-family="{SANS}" font-size="17" font-weight="650" '
+             f'letter-spacing="-0.3" fill="{T["txt"]}">Same map, two planners</text>',
+             f'<text x="28" y="60" font-family="{SANS}" font-size="12" '
+             f'fill="{T["mut"]}">seed {used} · regenerated nightly · the real search, '
+             f'replayed in the order the planner expanded it</text>']
+        s.append(panel(T, 28, "A*", "8-connected, octile heuristic", T["c1"],
+                       g, start, goal, ap, ae, a_ms, DUR))
+        s.append(panel(T, 28 + COLS * CELL + 52, "Theta*",
+                       "any-angle, line-of-sight reparenting", T["c4"],
+                       g, start, goal, tp, te, t_ms, DUR))
+        s.append('</svg>')
+        open(out, "w").write("\n".join(s))
+        print("%-14s %d KiB" % (os.path.basename(out), os.path.getsize(out) // 1024))
+
     print(f"seed {used}: A* {len(ae)} expanded / {len(ap)} pts / {a_ms:.1f} ms | "
-          f"Theta* {len(te)} / {len(tp)} / {t_ms:.1f} ms -> {OUT} "
-          f"({os.path.getsize(OUT)//1024} KiB)")
+          f"Theta* {len(te)} / {len(tp)} / {t_ms:.1f} ms")

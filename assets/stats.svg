@@ -1,96 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" fill="none" role="img" aria-label="Two charts. Left: monthly commit cadence, 240 commits authored across 61 months from 2021-07 to 2026-07, peaking at 49 in one month, median 8 in active months. Right: source-byte mix across 27 repositories - Python 30.7 percent, CMake 18.1 percent, YAML 15.0 percent, XML/URDF 14.8 percent, C++ 8.5 percent, Other 12.9 percent.">
-<title>Repository telemetry</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" fill="none" role="img" aria-label="Two charts. Left: monthly commit cadence, 240 commits authored across 61 months from 2021-07 to 2026-07, 20 active months, median 8, peak 49. Right: source-byte mix across 27 repositories - Python 30.7 percent, CMake 18.1 percent, YAML 15.0 percent, XML/URDF 14.8 percent, C++ 8.5 percent, Other 12.9 percent.">
+<title>Counted, not claimed</title>
 <defs>
-<pattern id="g3" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" stroke="#241a17" stroke-width="1"/></pattern>
-<style>.m{font-family:'JetBrains Mono',ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace} .t{font-size:11.5px;letter-spacing:2.2px;font-weight:700}
- .sub{font-size:9px;letter-spacing:1.3px} .met{font-size:9px;letter-spacing:1.5px}
- .ax{font-size:9.5px;letter-spacing:1.1px} .lg{font-size:9.5px;letter-spacing:0.9px}</style>
+<linearGradient id="plate" x1="0" y1="0" x2="0.3" y2="1">
+  <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#faf6f0"/>
+</linearGradient>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+  <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+  <stop offset="0.3" stop-color="#ffffff" stop-opacity="0.75"/>
+  <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+</linearGradient>
+<filter id="lift" x="-8%" y="-20%" width="116%" height="150%">
+  <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2a201a"
+                flood-opacity="0.08"/>
+</filter>
+<style>
+  text { font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif }
+  .mono { font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace }
+  .head { font-size:15px; font-weight:600; letter-spacing:-0.1px }
+  .sub  { font-size:11px; font-weight:400; letter-spacing:0px }
+  .ax   { font-size:10.5px; font-weight:500; letter-spacing:0.2px }
+  .lg   { font-size:11.5px; font-weight:450; letter-spacing:0px }
+  @media (prefers-reduced-motion: no-preference) {
+    /* Authored settled. These grow from nothing only when motion is welcome;
+       with it off the charts are already the right size. */
+    .bar { animation: grow 620ms cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: center bottom }
+    .seg { animation: wide 700ms cubic-bezier(0.22, 1, 0.36, 1) both }
+    @keyframes grow { from { transform: scaleY(0) } }
+    @keyframes wide { from { transform: scaleX(0) } }
+  }
+</style>
 </defs>
-<rect width="1200" height="300" fill="#100c0b"/>
-<rect x="20" y="20" width="738" height="260" rx="10" fill="#1a1412" stroke="#33241f"/>
-<rect x="20" y="20" width="738" height="260" rx="10" fill="url(#g3)" opacity="0.5"/>
-<path d="M30 20h58" stroke="#e0452c" stroke-width="2"/>
-<text class="m t" x="36" y="50" fill="#e0452c">06</text>
-<text class="m t" x="64" y="50" fill="#f2e8dd">COMMIT CADENCE</text>
-<text class="m sub" x="36" y="68" fill="#a8988a">240 commits authored · 2021-07 → 2026-07 · per month</text>
-<path d="M36 250h706" stroke="#33241f"/>
-<text class="m met" x="36" y="266" fill="#e0452c" opacity="0.9">20 ACTIVE MONTHS · MEDIAN 8 · PEAK 49</text>
-<path d="M60 228.0H740" stroke="#33241f" stroke-dasharray="none" opacity="1"/>
-<text class="m ax" x="52" y="231.0" fill="#a8988a" text-anchor="end">0</text>
-<path d="M60 170.0H740" stroke="#33241f" stroke-dasharray="2 5" opacity="0.8"/>
-<text class="m ax" x="52" y="173.0" fill="#a8988a" text-anchor="end">25</text>
-<path d="M60 112.0H740" stroke="#33241f" stroke-dasharray="2 5" opacity="0.8"/>
-<text class="m ax" x="52" y="115.0" fill="#a8988a" text-anchor="end">50</text>
-<path d="M61.1 228v-3.0a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.50s" fill="freeze"/></path>
-<path d="M139.1 228v-14.6a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.63s" fill="freeze"/></path>
-<path d="M150.3 228v-0.6a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.64s" fill="freeze"/></path>
-<path d="M161.4 228v-107.4a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.66s" fill="freeze"/></path>
-<path d="M183.7 228v-3.0a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.70s" fill="freeze"/></path>
-<path d="M261.7 228v-28.5a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.82s" fill="freeze"/></path>
-<path d="M295.2 228v-14.6a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.88s" fill="freeze"/></path>
-<path d="M440.1 228v-19.2a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.11s" fill="freeze"/></path>
-<path d="M462.4 228v-28.5a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.15s" fill="freeze"/></path>
-<path d="M495.8 228v-0.0a2.3 2.3 0 0 1 2.3 -2.3h4.4a2.3 2.3 0 0 1 2.3 2.3V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.20s" fill="freeze"/></path>
-<path d="M529.3 228v-12.2a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.26s" fill="freeze"/></path>
-<path d="M551.6 228v-33.1a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.29s" fill="freeze"/></path>
-<path d="M585.0 228v-21.5a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.35s" fill="freeze"/></path>
-<path d="M596.2 228v-5.3a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.36s" fill="freeze"/></path>
-<path d="M640.7 228v-12.2a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.44s" fill="freeze"/></path>
-<path d="M651.9 228v-21.5a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.45s" fill="freeze"/></path>
-<path d="M674.2 228v-5.3a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.49s" fill="freeze"/></path>
-<path d="M696.5 228v-109.7a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.53s" fill="freeze"/></path>
-<path d="M707.6 228v-0.0a2.3 2.3 0 0 1 2.3 -2.3h4.4a2.3 2.3 0 0 1 2.3 2.3V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.54s" fill="freeze"/></path>
-<path d="M729.9 228v-40.1a4.0 4.0 0 0 1 4.0 -4.0h1.0a4.0 4.0 0 0 1 4.0 4.0V228z" fill="#e0452c"><animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.58s" fill="freeze"/></path>
-<text class="m ax" x="701.0" y="107.3" fill="#f2e8dd" text-anchor="middle">49</text>
-<text class="m ax" x="734.4" y="176.9" fill="#f2e8dd" text-anchor="middle">19</text>
-<path d="M132.5 228v5" stroke="#33241f"/>
-<text class="m ax" x="132.5" y="245" fill="#a8988a" text-anchor="middle">2022</text>
-<path d="M266.2 228v5" stroke="#33241f"/>
-<text class="m ax" x="266.2" y="245" fill="#a8988a" text-anchor="middle">2023</text>
-<path d="M400.0 228v5" stroke="#33241f"/>
-<text class="m ax" x="400.0" y="245" fill="#a8988a" text-anchor="middle">2024</text>
-<path d="M533.8 228v5" stroke="#33241f"/>
-<text class="m ax" x="533.8" y="245" fill="#a8988a" text-anchor="middle">2025</text>
-<path d="M667.5 228v5" stroke="#33241f"/>
-<text class="m ax" x="667.5" y="245" fill="#a8988a" text-anchor="middle">2026</text>
-<path d="M65.6 228v5" stroke="#33241f"/>
-<text class="m ax" x="65.6" y="245" fill="#a8988a" text-anchor="middle">2021</text>
-<text class="m ax" x="60" y="104" fill="#a8988a">commits / month</text>
-<rect x="770" y="20" width="410" height="260" rx="10" fill="#1a1412" stroke="#33241f"/>
-<rect x="770" y="20" width="410" height="260" rx="10" fill="url(#g3)" opacity="0.5"/>
-<path d="M780 20h58" stroke="#7fae8e" stroke-width="2"/>
-<text class="m t" x="786" y="50" fill="#7fae8e">07</text>
-<text class="m t" x="814" y="50" fill="#f2e8dd">SOURCE MIX</text>
-<text class="m sub" x="786" y="68" fill="#a8988a">bytes tracked across 27 own repos</text>
-<path d="M786 250h378" stroke="#33241f"/>
-<text class="m met" x="786" y="266" fill="#7fae8e" opacity="0.9">PYTHON + C++ ON ROS 2 · URDF/XACRO · CMAKE</text>
-<rect x="786.0" y="104" width="114.0" height="28" rx="4" fill="#e0452c"><animate attributeName="width" values="0;114.0" dur="0.8s" begin="0.30s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
-<text class="m ax" x="843.0" y="121.4" fill="#1a1412" text-anchor="middle" opacity="0.95">30.7%</text>
-<rect x="902.0" y="104" width="66.6" height="28" rx="0" fill="#7fae8e"><animate attributeName="width" values="0;66.6" dur="0.8s" begin="0.39s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
-<text class="m ax" x="935.3" y="121.4" fill="#1a1412" text-anchor="middle" opacity="0.95">18.1%</text>
-<rect x="970.6" y="104" width="54.6" height="28" rx="0" fill="#e0a03a"><animate attributeName="width" values="0;54.6" dur="0.8s" begin="0.48s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
-<text class="m ax" x="997.9" y="121.4" fill="#1a1412" text-anchor="middle" opacity="0.95">15.0%</text>
-<rect x="1027.2" y="104" width="53.9" height="28" rx="0" fill="#b85236"><animate attributeName="width" values="0;53.9" dur="0.8s" begin="0.57s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
-<text class="m ax" x="1054.1" y="121.4" fill="#1a1412" text-anchor="middle" opacity="0.95">14.8%</text>
-<rect x="1083.1" y="104" width="30.0" height="28" rx="0" fill="#e8dcc8"><animate attributeName="width" values="0;30.0" dur="0.8s" begin="0.66s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
-<rect x="1115.1" y="104" width="48.9" height="28" rx="4" fill="#a8988a"><animate attributeName="width" values="0;48.9" dur="0.8s" begin="0.75s" fill="freeze" calcMode="spline" keySplines="0.2 0.9 0.2 1"/></rect>
-<rect x="786" y="154" width="10" height="10" rx="2.5" fill="#e0452c"/>
-<text class="m lg" x="803" y="162" fill="#f2e8dd">Python</text>
-<text class="m lg" x="958" y="162" fill="#a8988a" text-anchor="end">30.7%</text>
-<rect x="786" y="178" width="10" height="10" rx="2.5" fill="#7fae8e"/>
-<text class="m lg" x="803" y="186" fill="#f2e8dd">CMake</text>
-<text class="m lg" x="958" y="186" fill="#a8988a" text-anchor="end">18.1%</text>
-<rect x="786" y="202" width="10" height="10" rx="2.5" fill="#e0a03a"/>
-<text class="m lg" x="803" y="210" fill="#f2e8dd">YAML</text>
-<text class="m lg" x="958" y="210" fill="#a8988a" text-anchor="end">15.0%</text>
-<rect x="982" y="154" width="10" height="10" rx="2.5" fill="#b85236"/>
-<text class="m lg" x="999" y="162" fill="#f2e8dd">XML/URDF</text>
-<text class="m lg" x="1154" y="162" fill="#a8988a" text-anchor="end">14.8%</text>
-<rect x="982" y="178" width="10" height="10" rx="2.5" fill="#e8dcc8"/>
-<text class="m lg" x="999" y="186" fill="#f2e8dd">C++</text>
-<text class="m lg" x="1154" y="186" fill="#a8988a" text-anchor="end">8.5%</text>
-<rect x="982" y="202" width="10" height="10" rx="2.5" fill="#a8988a"/>
-<text class="m lg" x="999" y="210" fill="#f2e8dd">Other</text>
-<text class="m lg" x="1154" y="210" fill="#a8988a" text-anchor="end">12.9%</text>
-<text class="m ax" x="786" y="234" fill="#a8988a" opacity="0.85">1.89 MiB tracked  ·  forked upstreams excluded</text>
+<rect width="1000" height="300" fill="#faf6f0"/>
+<rect x="18" y="18" width="616" height="264" rx="14" fill="url(#plate)" filter="url(#lift)"/>
+<rect x="18.5" y="18.5" width="615" height="263" rx="13.5" stroke="#dcd2c4"/>
+<path d="M42 18H610" stroke="url(#edge)" stroke-width="1.2"/>
+<circle cx="44" cy="48" r="3.5" fill="#c2411f"/>
+<text class="head" x="56" y="52" fill="#191411">Commit cadence</text>
+<text class="sub" x="44" y="74" fill="#6f6357">240 commits authored · 2021-07 to 2026-07 · 20 active months · median 8 · peak 49</text>
+<path d="M64 232.0H612" stroke="#dcd2c4" stroke-dasharray="none"/>
+<text class="mono ax" x="54" y="235.5" fill="#6f6357" text-anchor="end">0</text>
+<path d="M64 171.0H612" stroke="#dcd2c4" stroke-dasharray="2 5"/>
+<text class="mono ax" x="54" y="174.5" fill="#6f6357" text-anchor="end">25</text>
+<path d="M64 110.0H612" stroke="#dcd2c4" stroke-dasharray="2 5"/>
+<text class="mono ax" x="54" y="113.5" fill="#6f6357" text-anchor="end">50</text>
+<path class="bar" style="animation-delay:0.00s" d="M65.0 232v-3.8a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.08s" d="M127.9 232v-16.0a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.10s" d="M136.9 232v-1.4a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.11s" d="M145.9 232v-113.6a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.13s" d="M163.8 232v-3.8a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.22s" d="M226.7 232v-30.7a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.25s" d="M253.7 232v-16.0a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.41s" d="M370.4 232v-20.9a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.43s" d="M388.4 232v-30.7a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.47s" d="M415.4 232v-0.0a2.4 2.4 0 0 1 2.4 -2.4h2.1a2.4 2.4 0 0 1 2.4 2.4V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.50s" d="M442.3 232v-13.6a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.53s" d="M460.3 232v-35.5a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.56s" d="M487.2 232v-23.3a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.58s" d="M496.2 232v-6.3a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.62s" d="M532.1 232v-13.6a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.64s" d="M541.1 232v-23.3a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.66s" d="M559.1 232v-6.3a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.68s" d="M577.1 232v-116.1a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.70s" d="M586.0 232v-0.0a2.4 2.4 0 0 1 2.4 -2.4h2.1a2.4 2.4 0 0 1 2.4 2.4V232z" fill="#c2411f"/>
+<path class="bar" style="animation-delay:0.72s" d="M604.0 232v-42.9a3.5 3.5 0 0 1 3.5 -3.5h0.0a3.5 3.5 0 0 1 3.5 3.5V232z" fill="#c2411f"/>
+<text class="mono ax" x="580.6" y="104.4" fill="#191411" text-anchor="middle">49</text>
+<path d="M122.4 232v5" stroke="#dcd2c4"/>
+<text class="mono ax" x="122.4" y="251" fill="#6f6357" text-anchor="middle">2022</text>
+<path d="M230.2 232v5" stroke="#dcd2c4"/>
+<text class="mono ax" x="230.2" y="251" fill="#6f6357" text-anchor="middle">2023</text>
+<path d="M338.0 232v5" stroke="#dcd2c4"/>
+<text class="mono ax" x="338.0" y="251" fill="#6f6357" text-anchor="middle">2024</text>
+<path d="M445.8 232v5" stroke="#dcd2c4"/>
+<text class="mono ax" x="445.8" y="251" fill="#6f6357" text-anchor="middle">2025</text>
+<path d="M553.6 232v5" stroke="#dcd2c4"/>
+<text class="mono ax" x="553.6" y="251" fill="#6f6357" text-anchor="middle">2026</text>
+<text class="ax" x="64" y="100" fill="#6f6357">commits per month</text>
+<rect x="648" y="18" width="334" height="264" rx="14" fill="url(#plate)" filter="url(#lift)"/>
+<rect x="648.5" y="18.5" width="333" height="263" rx="13.5" stroke="#dcd2c4"/>
+<path d="M672 18H958" stroke="url(#edge)" stroke-width="1.2"/>
+<circle cx="674" cy="48" r="3.5" fill="#4c5fa8"/>
+<text class="head" x="686" y="52" fill="#191411">Source mix</text>
+<text class="sub" x="674" y="74" fill="#6f6357">bytes across 27 own repos · forked upstreams excluded</text>
+<rect class="seg" style="animation-delay:0.00s;transform-origin:674.0px 96px" x="674.0" y="96" width="84.5" height="26" rx="4" fill="#c2411f"/>
+<rect class="seg" style="animation-delay:0.06s;transform-origin:760.5px 96px" x="760.5" y="96" width="49.2" height="26" rx="0" fill="#2f7a5c"/>
+<rect class="seg" style="animation-delay:0.12s;transform-origin:811.7px 96px" x="811.7" y="96" width="40.2" height="26" rx="0" fill="#4c5fa8"/>
+<rect class="seg" style="animation-delay:0.18s;transform-origin:853.9px 96px" x="853.9" y="96" width="39.7" height="26" rx="0" fill="#8a6a15"/>
+<rect class="seg" style="animation-delay:0.24s;transform-origin:895.6px 96px" x="895.6" y="96" width="21.9" height="26" rx="0" fill="#3d332c"/>
+<rect class="seg" style="animation-delay:0.30s;transform-origin:919.5px 96px" x="919.5" y="96" width="36.5" height="26" rx="4" fill="#6f6357"/>
+<rect x="674" y="147" width="11" height="11" rx="3" fill="#c2411f"/>
+<text class="lg" x="693" y="156" fill="#191411">Python</text>
+<text class="mono lg" x="812" y="156" fill="#6f6357" text-anchor="end">30.7%</text>
+<rect x="674" y="173" width="11" height="11" rx="3" fill="#2f7a5c"/>
+<text class="lg" x="693" y="182" fill="#191411">CMake</text>
+<text class="mono lg" x="812" y="182" fill="#6f6357" text-anchor="end">18.1%</text>
+<rect x="674" y="199" width="11" height="11" rx="3" fill="#4c5fa8"/>
+<text class="lg" x="693" y="208" fill="#191411">YAML</text>
+<text class="mono lg" x="812" y="208" fill="#6f6357" text-anchor="end">15.0%</text>
+<rect x="830" y="147" width="11" height="11" rx="3" fill="#8a6a15"/>
+<text class="lg" x="849" y="156" fill="#191411">XML/URDF</text>
+<text class="mono lg" x="968" y="156" fill="#6f6357" text-anchor="end">14.8%</text>
+<rect x="830" y="173" width="11" height="11" rx="3" fill="#3d332c"/>
+<text class="lg" x="849" y="182" fill="#191411">C++</text>
+<text class="mono lg" x="968" y="182" fill="#6f6357" text-anchor="end">8.5%</text>
+<rect x="830" y="199" width="11" height="11" rx="3" fill="#6f6357"/>
+<text class="lg" x="849" y="208" fill="#191411">Other</text>
+<text class="mono lg" x="968" y="208" fill="#6f6357" text-anchor="end">12.9%</text>
+<text class="ax" x="674" y="250" fill="#6f6357">1.89 MiB tracked</text>
 </svg>
