@@ -1,25 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" fill="none" role="img" aria-label="Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 390" width="1000" height="390" fill="none" role="img" aria-label="Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation, and the bringup that makes them run.">
 <title>Mohammed Abdul Rahman — Robotics engineer</title>
-<desc>Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California.</desc>
+<desc>Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation, and the bringup that makes them run.</desc>
 <defs><style>
-  text { font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif; fill:#1f2328 }
+  text { font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif }
   .mono { font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace }
-  .mut { fill:#59636e }
   @media (prefers-reduced-motion: no-preference) {
     /* Authored settled; this moves away from settled and back, so switching
        the block off leaves the plate correct rather than stuck at frame zero. */
-    .in { animation: rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both }
-    .d1 { animation-delay: 40ms }  .d2 { animation-delay: 90ms }
-    .d3 { animation-delay: 140ms } .d4 { animation-delay: 190ms }
-    @keyframes rise { from { opacity: 0; transform: translateY(6px) } }
+    .in { animation: rise 560ms cubic-bezier(0.22, 1, 0.36, 1) both }
+    .d1 { animation-delay: 40ms } .d2 { animation-delay: 100ms }
+    .d3 { animation-delay: 170ms }
+    @keyframes rise { from { opacity: 0; transform: translateY(7px) } }
   }
 </style></defs>
-<rect x="0.5" y="0.5" width="999" height="259" rx="6" fill="#ffffff" stroke="#d1d9e0"/>
-<text class="in d1 mono mut" x="56" y="60" font-size="11.5" font-weight="500" letter-spacing="0.4">ROBOTICS ENGINEER</text>
-<text class="in d2" x="56" y="118" font-size="44" font-weight="600" letter-spacing="-1.1">Mohammed Abdul Rahman</text>
-<text class="in d3 mut" x="56" y="156" font-size="15" letter-spacing="-0.1">Motion planning, manipulation, and the bringup that makes them run.</text>
-<path class="in d4" d="M56 190H944" stroke="#d1d9e0"/>
-<g class="in d4"><text class="mono mut" x="56" y="216" font-size="10" font-weight="500" letter-spacing="0.5">NOW</text><text x="56" y="238" font-size="13" font-weight="500" letter-spacing="-0.05">Advanced Robotics and AI intern, Siemens</text></g>
-<g class="in d4"><text class="mono mut" x="356" y="216" font-size="10" font-weight="500" letter-spacing="0.5">STUDY</text><text x="356" y="238" font-size="13" font-weight="500" letter-spacing="-0.05">MS Robotics, Northeastern ’27</text></g>
-<g class="in d4"><text class="mono mut" x="656" y="216" font-size="10" font-weight="500" letter-spacing="0.5">BASED</text><text x="656" y="238" font-size="13" font-weight="500" letter-spacing="-0.05">Berkeley, California</text></g>
+<rect width="1000" height="390" fill="#ffffff"/>
+<text class="in d1 mono" x="72" y="100" font-size="12" font-weight="500" letter-spacing="1" fill="#59636e">ROBOTICS ENGINEER</text>
+<text class="in d2" x="72" y="192" font-size="88" font-weight="600" letter-spacing="-2.6" fill="#1f2328">Mohammed</text>
+<text class="in d2" x="72" y="276" font-size="88" font-weight="600" letter-spacing="-2.6" fill="#1f2328">Abdul Rahman</text>
+<text class="in d3" x="72" y="330" font-size="17" font-weight="400" letter-spacing="-0.1" fill="#59636e">Motion planning, manipulation, and the bringup that makes them run.</text>
 </svg>

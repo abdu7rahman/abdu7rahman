@@ -20,10 +20,11 @@ from palette import EASE_CSS, MONO, SANS, THEMES, suffix                # noqa: 
 ASSETS = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets")
 
 COLS, ROWS = 78, 46
-# Sized so two panels plus their gutters land on 1000, which is roughly the
-# width the README column gives an image. Authoring wider meant the browser
-# scaled the whole plate down and every label with it.
-CELL = 5.72
+# 1000 wide with a 72px margin either side, matching the hero, and 40px between
+# the two maps: (1000 - 144 - 40) / 2 = 408 per map, 408 / 78 columns.
+MARGIN, GUTTER = 72, 40
+PLATE_W = 1000
+CELL = (PLATE_W - 2 * MARGIN - GUTTER) / 2 / COLS
 
 
 def stub_ros():
@@ -128,13 +129,15 @@ def panel(T, ox, title, sub, accent, g, start, goal, path, explored, ms, dur):
     empty map and no path, which is what the SMIL version did.
     """
     W = COLS * CELL
-    out = [f'<g transform="translate({ox} 130)">']
-    out.append(f'<text x="0" y="-38" font-family="{SANS}" font-size="14.5" font-weight="600" '
-               f'letter-spacing="-0.1" fill="{T["txt"]}">{title}</text>')
-    out.append(f'<text x="0" y="-20" font-family="{SANS}" font-size="11" '
+    out = [f'<g transform="translate({ox} 176)">']
+    out.append(f'<text x="0" y="-34" font-family="{SANS}" font-size="15" font-weight="600" '
+               f'letter-spacing="-0.2" fill="{T["txt"]}">{title}</text>')
+    out.append(f'<text x="0" y="-14" font-family="{SANS}" font-size="11.5" '
                f'fill="{T["mut"]}">{sub}</text>')
-    out.append(f'<rect x="-6" y="-6" width="{W+12}" height="{ROWS*CELL+12}" rx="8" '
-               f'fill="{T["sunk"]}" stroke="{T["line"]}"/>')
+    # The field is a surface, not a panel: a fill marks where the map is, and
+    # there is no border, because the map's own edge already is one.
+    out.append(f'<rect x="0" y="0" width="{W}" height="{ROWS*CELL}" rx="4" '
+               f'fill="{T["sunk"]}"/>')
     for r in range(ROWS):
         run = None
         for c in range(COLS + 1):
@@ -173,7 +176,7 @@ def panel(T, ox, title, sub, accent, g, start, goal, path, explored, ms, dur):
                f'stroke="{T["sunk"]}" stroke-width="2"><title>start</title></circle>')
     out.append(f'<circle cx="{gx:.1f}" cy="{gy:.1f}" r="4.5" fill="{T["sunk"]}" '
                f'stroke="{T["txt"]}" stroke-width="2.4"><title>goal</title></circle>')
-    out.append(f'<text x="0" y="{ROWS*CELL+26}" font-family="{MONO}" font-size="10.5" '
+    out.append(f'<text x="0" y="{ROWS*CELL+28}" font-family="{MONO}" font-size="10.5" '
                f'letter-spacing="0.2" fill="{T["mut"]}">{len(explored):,} expanded  ·  '
                f'{len(path)} waypoints  ·  {ms:.1f} ms</text>')
     out.append("</g>")
@@ -187,8 +190,8 @@ if __name__ == "__main__":
     seed = int(sys.argv[1]) if len(sys.argv) > 1 else int(time.time()) % 100000
     g, start, goal, (ap, ae, a_ms), (tp, te, t_ms), used = plan(seed)
 
-    W = COLS * CELL * 2 + 108
-    H = ROWS * CELL + 188
+    W = PLATE_W
+    H = int(ROWS * CELL) + 218
     DUR = 9.0
 
     # One search, both themes. Rendering them in separate processes meant two
@@ -214,17 +217,17 @@ if __name__ == "__main__":
   }}
 </style>
 </defs>''',
-             f'<rect width="{W:.0f}" height="{H:.0f}" rx="6" fill="{T["bg"]}"/>',
-             f'<rect x="0.5" y="0.5" width="{W-1:.0f}" height="{H-1:.0f}" rx="6" '
-             f'stroke="{T["line"]}"/>',
-             f'<text x="28" y="38" font-family="{SANS}" font-size="17" font-weight="650" '
-             f'letter-spacing="-0.3" fill="{T["txt"]}">Same map, two planners</text>',
-             f'<text x="28" y="60" font-family="{SANS}" font-size="12" '
+             f'<rect width="{W:.0f}" height="{H:.0f}" fill="{T["bg"]}"/>',
+             f'<text x="{MARGIN}" y="62" font-family="{SANS}" font-size="19" '
+             f'font-weight="600" letter-spacing="-0.4" fill="{T["txt"]}">'
+             f'Same map, two planners</text>',
+             f'<path d="M{MARGIN} 80H{W-MARGIN}" stroke="{T["line"]}"/>',
+             f'<text x="{MARGIN}" y="102" font-family="{SANS}" font-size="12" '
              f'fill="{T["mut"]}">seed {used} · regenerated nightly · the real search, '
              f'replayed in the order the planner expanded it</text>']
-        s.append(panel(T, 28, "A*", "8-connected, octile heuristic", T["ramp"][4],
+        s.append(panel(T, MARGIN, "A*", "8-connected, octile heuristic", T["ramp"][4],
                        g, start, goal, ap, ae, a_ms, DUR))
-        s.append(panel(T, 28 + COLS * CELL + 52, "Theta*",
+        s.append(panel(T, MARGIN + COLS * CELL + GUTTER, "Theta*",
                        "any-angle, line-of-sight reparenting", T["ramp"][4],
                        g, start, goal, tp, te, t_ms, DUR))
         s.append('</svg>')

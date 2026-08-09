@@ -1,15 +1,24 @@
 #!/usr/bin/env python3
 """The banner at the top of the README.
 
-Minimal, and on purpose. GitHub is a neutral page -- near-white or near-black,
-one hairline weight, no accent anywhere -- so a plate that arrives with a red
-rule on warm paper does not sit in that page, it sits on top of it. This one
-uses GitHub's own surface, border and text values, which means the edge of the
-plate is the same hairline as the edge of a table three sections down.
+Three things, in a lot of space, with one of them very large.
 
-What that leaves is a name, a role, a sentence and three facts, set in the
-system font the rest of the page is set in. No gradient, no grid pattern, no
-drop shadow, no chips, no accent. The hierarchy is size and space.
+The version before this was a hairline rectangle holding a 44px name and
+three columns of small print. That is minimal and it is not simple -- it is
+a default card, and it read like one. Stripping the colour out of a design
+does not leave a design.
+
+So the box is gone. Nothing here is grouped by a border; it is grouped by
+space, which is what makes a layout feel deliberate rather than defaulted.
+The name carries the plate at 76px with the negative tracking display type
+wants, and it is the only large thing, so it is unambiguously the first
+thing read. The eyebrow and the one line under it are deliberately small --
+the contrast between 12px and 76px is the hierarchy, and a middle size
+would blur it.
+
+The facts that used to sit in this plate are gone too. They were already in
+the table immediately below, and saying a thing twice in the first screen
+is the opposite of simple.
 
     python3 tools/gen_hero.py light
     python3 tools/gen_hero.py dark
@@ -25,19 +34,18 @@ os.makedirs(OUT, exist_ok=True)
 
 T = theme_from_argv(sys.argv)
 SFX = suffix(T)
-W, H = 1000, 260
+W, H = 1000, 390
 
-NAME = "Mohammed Abdul Rahman"
-ROLE = "Robotics engineer"
+EYEBROW = "Robotics engineer"
+# Two lines, so it can be 88px instead of the 64 a single line would have to
+# shrink to. The system font resolves differently on every reader's machine, so
+# a single line sized to just fit here would clip on a wider one; two lines buy
+# both the size and the slack.
+NAME = ("Mohammed", "Abdul Rahman")
 LEDE = "Motion planning, manipulation, and the bringup that makes them run."
-FACTS = (("Now", "Advanced Robotics and AI intern, Siemens"),
-         ("Study", "MS Robotics, Northeastern ’27"),
-         ("Based", "Berkeley, California"))
 
 ALT = ("Mohammed Abdul Rahman — robotics engineer. Motion planning, "
-       "manipulation and hardware bringup. Advanced Robotics and AI intern at "
-       "Siemens; MS Robotics at Northeastern University, class of 2027; based "
-       "in Berkeley, California.")
+       "manipulation, and the bringup that makes them run.")
 
 
 def esc(s):
@@ -46,50 +54,38 @@ def esc(s):
 
 s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}"'
      f' height="{H}" fill="none" role="img" aria-label="{esc(ALT)}">',
-     f'<title>{esc(NAME)} — {esc(ROLE)}</title>',
+     f'<title>{esc(" ".join(NAME))} — {esc(EYEBROW)}</title>',
      f'<desc>{esc(ALT)}</desc>',
      f'''<defs><style>
-  text {{ font-family:{SANS}; fill:{T['txt']} }}
+  text {{ font-family:{SANS} }}
   .mono {{ font-family:{MONO} }}
-  .mut {{ fill:{T['mut']} }}
   @media (prefers-reduced-motion: no-preference) {{
     /* Authored settled; this moves away from settled and back, so switching
        the block off leaves the plate correct rather than stuck at frame zero. */
-    .in {{ animation: rise 520ms {EASE_CSS} both }}
-    .d1 {{ animation-delay: 40ms }}  .d2 {{ animation-delay: 90ms }}
-    .d3 {{ animation-delay: 140ms }} .d4 {{ animation-delay: 190ms }}
-    @keyframes rise {{ from {{ opacity: 0; transform: translateY(6px) }} }}
+    .in {{ animation: rise 560ms {EASE_CSS} both }}
+    .d1 {{ animation-delay: 40ms }} .d2 {{ animation-delay: 100ms }}
+    .d3 {{ animation-delay: 170ms }}
+    @keyframes rise {{ from {{ opacity: 0; transform: translateY(7px) }} }}
   }}
-</style></defs>''']
+</style></defs>''',
+     f'<rect width="{W}" height="{H}" fill="{T["bg"]}"/>']
 
-# One hairline, at the weight GitHub draws a table border. Nothing else.
-s.append(f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="6" '
-         f'fill="{T["bg"]}" stroke="{T["line"]}"/>')
+X = 72
 
-X, RX = 56, 620
-
-s.append(f'<text class="in d1 mono mut" x="{X}" y="60" font-size="11.5" '
-         f'font-weight="500" letter-spacing="0.4">{esc(ROLE.upper())}</text>')
+# 12px against 76px. The gap between them is the hierarchy; a middle size in
+# between would only blur it.
+s.append(f'<text class="in d1 mono" x="{X}" y="100" font-size="12" font-weight="500" '
+         f'letter-spacing="1" fill="{T["mut"]}">{esc(EYEBROW.upper())}</text>')
 
 # Display type wants negative tracking -- letters read too far apart as they
-# grow. The old plate set 40px at letter-spacing 1.5, which is the rule
-# inverted. It fits on one line at 44px, so it gets one line.
-s.append(f'<text class="in d2" x="{X}" y="118" font-size="44" font-weight="600" '
-         f'letter-spacing="-1.1">{esc(NAME)}</text>')
+# grow. -0.03em at 76px is -2.3.
+s.append(f'<text class="in d2" x="{X}" y="192" font-size="88" font-weight="600" '
+         f'letter-spacing="-2.6" fill="{T["txt"]}">{esc(NAME[0])}</text>')
+s.append(f'<text class="in d2" x="{X}" y="276" font-size="88" font-weight="600" '
+         f'letter-spacing="-2.6" fill="{T["txt"]}">{esc(NAME[1])}</text>')
 
-s.append(f'<text class="in d3 mut" x="{X}" y="156" font-size="15" '
-         f'letter-spacing="-0.1">{esc(LEDE)}</text>')
-
-# The facts sit on a rule rather than in a boxed column: one line, not a panel.
-s.append(f'<path class="in d4" d="M{X} 190H{W-X}" stroke="{T["line"]}"/>')
-fx = X
-for k, v in FACTS:
-    s.append(f'<g class="in d4">'
-             f'<text class="mono mut" x="{fx}" y="216" font-size="10" '
-             f'font-weight="500" letter-spacing="0.5">{esc(k.upper())}</text>'
-             f'<text x="{fx}" y="238" font-size="13" font-weight="500" '
-             f'letter-spacing="-0.05">{esc(v)}</text></g>')
-    fx += 300
+s.append(f'<text class="in d3" x="{X}" y="330" font-size="17" font-weight="400" '
+         f'letter-spacing="-0.1" fill="{T["mut"]}">{esc(LEDE)}</text>')
 
 s.append('</svg>')
 

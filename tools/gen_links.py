@@ -51,9 +51,9 @@ def esc(s):
 EM_UPPER = 0.64
 
 
-def button(name, glyph, label, alt, solid=False, pad=22):
+def button(name, glyph, label, alt, solid=False, pad=26):
     """One button. Width follows the label rather than a fixed column."""
-    h = 44
+    h = 48
     lw = len(label) * EM_UPPER * 13.5
     w = int(pad + 24 + 10 + lw + pad)
 
@@ -64,10 +64,12 @@ def button(name, glyph, label, alt, solid=False, pad=22):
     fill = T["txt"] if solid else T["sunk"]
     stroke = T["txt"] if solid else T["line"]
 
-    s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}"'
-         f' height="{h}" fill="none" role="img" aria-label="{esc(alt)}">',
+    # A pill, not a rounded box. Fully rounded ends read as pressable at a
+    # glance, which is the whole job of the shape.
+    s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}'
+         f'" height="{h}" fill="none" role="img" aria-label="{esc(alt)}">',
          f'<title>{esc(alt)}</title>',
-         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="6" '
+         f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="{(h-1)/2:.1f}" '
          f'fill="{fill}" stroke="{stroke}"/>',
          f'<g transform="translate({pad} {(h-24)//2})">{GLYPH[glyph].format(c=accent)}</g>',
          f'<text x="{pad + 24 + 10 + lw / 2:.0f}" y="{h//2 + 5}" font-family="{SANS}" '
