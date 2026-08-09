@@ -1,61 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" fill="none" role="img" aria-label="Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California. Works in ROS 2, MoveIt 2, Isaac Sim and physical AI.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 260" width="1000" height="260" fill="none" role="img" aria-label="Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California.">
 <title>Mohammed Abdul Rahman — Robotics engineer</title>
-<desc>Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California. Works in ROS 2, MoveIt 2, Isaac Sim and physical AI.</desc>
-<defs>
-<linearGradient id="plate" x1="0" y1="0" x2="0.35" y2="1">
-  <stop offset="0" stop-color="#ffffff"/>
-  <stop offset="1" stop-color="#faf6f0"/>
-</linearGradient>
-<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
-  <stop offset="0.28" stop-color="#ffffff" stop-opacity="0.9"/>
-  <stop offset="0.75" stop-color="#ffffff" stop-opacity="0.35"/>
-  <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
-</linearGradient>
-<linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="#c2411f"/>
-  <stop offset="1" stop-color="#c2411f" stop-opacity="0.25"/>
-</linearGradient>
-<filter id="lift" x="-12%" y="-30%" width="124%" height="180%">
-  <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#2a201a"
-                flood-opacity="0.1"/>
-</filter>
-<pattern id="paper" width="48" height="48" patternUnits="userSpaceOnUse">
-  <path d="M48 0H0V48" stroke="#ebe3d7" stroke-width="1"/>
-</pattern>
-<clipPath id="plateclip"><rect x="16" y="10" width="968" height="268" rx="16"/></clipPath>
-<style>
-  text { font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif }
+<desc>Mohammed Abdul Rahman — robotics engineer. Motion planning, manipulation and hardware bringup. Advanced Robotics and AI intern at Siemens; MS Robotics at Northeastern University, class of 2027; based in Berkeley, California.</desc>
+<defs><style>
+  text { font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif; fill:#1f2328 }
   .mono { font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace }
+  .mut { fill:#59636e }
   @media (prefers-reduced-motion: no-preference) {
-    /* Authored settled, animated away from settled and back, so switching this
-       block off leaves the plate correct rather than stuck at frame zero. */
-    .in { animation: rise 620ms cubic-bezier(0.22, 1, 0.36, 1) both }
-    .d1 { animation-delay: 60ms }  .d2 { animation-delay: 120ms }
-    .d3 { animation-delay: 180ms } .d4 { animation-delay: 240ms }
-    .d5 { animation-delay: 300ms }
-    .wipe { animation: wipe 900ms cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: 140ms }
-    @keyframes rise { from { opacity: 0; transform: translateY(8px) } }
-    @keyframes wipe { from { transform: scaleX(0) } }
+    /* Authored settled; this moves away from settled and back, so switching
+       the block off leaves the plate correct rather than stuck at frame zero. */
+    .in { animation: rise 520ms cubic-bezier(0.22, 1, 0.36, 1) both }
+    .d1 { animation-delay: 40ms }  .d2 { animation-delay: 90ms }
+    .d3 { animation-delay: 140ms } .d4 { animation-delay: 190ms }
+    @keyframes rise { from { opacity: 0; transform: translateY(6px) } }
   }
-</style>
-</defs>
-<rect x="16" y="10" width="968" height="268" rx="16" fill="url(#plate)" filter="url(#lift)"/>
-<g clip-path="url(#plateclip)"><rect x="16" y="10" width="968" height="268" fill="url(#paper)" opacity="0.5"/></g>
-<rect x="16.5" y="10.5" width="967" height="267" rx="15.5" stroke="#dcd2c4"/>
-<path d="M40 11H960" stroke="url(#edge)" stroke-width="1.2"/>
-<text class="in d1 mono" x="64" y="68" font-size="11" font-weight="500" letter-spacing="0.9" fill="#c2411f">ROBOTICS ENGINEER</text>
-<text class="in d2" x="64" y="120" font-size="46" font-weight="700" letter-spacing="-1.2" fill="#191411">Mohammed</text>
-<text class="in d2" x="64" y="166" font-size="46" font-weight="700" letter-spacing="-1.2" fill="#191411">Abdul Rahman</text>
-<rect class="wipe" x="64" y="184" width="300" height="3" rx="1.5" fill="url(#rule)" style="transform-origin:64px 185px"/>
-<text class="in d3" x="64" y="222" font-size="14.5" font-weight="400" letter-spacing="-0.1" fill="#6f6357">Motion planning, manipulation, and the bringup that makes them run.</text>
-<g class="in d4"><rect x="64" y="244" width="64" height="27" rx="8" fill="#f1ebe1" stroke="#dcd2c4"/><text class="mono" x="96" y="261.5" font-size="11" font-weight="500" letter-spacing="0.35" fill="#6f6357" text-anchor="middle">ROS 2</text></g>
-<g class="in d4"><rect x="136" y="244" width="87" height="27" rx="8" fill="#f1ebe1" stroke="#dcd2c4"/><text class="mono" x="179" y="261.5" font-size="11" font-weight="500" letter-spacing="0.35" fill="#6f6357" text-anchor="middle">MoveIt 2</text></g>
-<g class="in d4"><rect x="231" y="244" width="94" height="27" rx="8" fill="#f1ebe1" stroke="#dcd2c4"/><text class="mono" x="278" y="261.5" font-size="11" font-weight="500" letter-spacing="0.35" fill="#6f6357" text-anchor="middle">Isaac Sim</text></g>
-<g class="in d4"><rect x="333" y="244" width="110" height="27" rx="8" fill="#f1ebe1" stroke="#dcd2c4"/><text class="mono" x="388" y="261.5" font-size="11" font-weight="500" letter-spacing="0.35" fill="#6f6357" text-anchor="middle">Physical AI</text></g>
-<path d="M606 58V252" stroke="#dcd2c4"/>
-<g class="in d3"><text class="mono" x="646" y="74" font-size="9.5" font-weight="500" letter-spacing="0.5" fill="#6f6357">NOW</text><text x="646" y="97" font-size="13.5" font-weight="500" letter-spacing="-0.1" fill="#191411">Advanced Robotics and AI intern, Siemens</text></g>
-<g class="in d4"><text class="mono" x="646" y="132" font-size="9.5" font-weight="500" letter-spacing="0.5" fill="#6f6357">STUDY</text><text x="646" y="155" font-size="13.5" font-weight="500" letter-spacing="-0.1" fill="#191411">MS Robotics, Northeastern ’27</text></g>
-<g class="in d5"><text class="mono" x="646" y="190" font-size="9.5" font-weight="500" letter-spacing="0.5" fill="#6f6357">BASED</text><text x="646" y="213" font-size="13.5" font-weight="500" letter-spacing="-0.1" fill="#191411">Berkeley, California</text></g>
-<text class="in d5 mono" x="646" y="262" font-size="10.5" font-weight="400" letter-spacing="0.4" fill="#6f6357" opacity="0.8">building robots that may work</text>
+</style></defs>
+<rect x="0.5" y="0.5" width="999" height="259" rx="6" fill="#ffffff" stroke="#d1d9e0"/>
+<text class="in d1 mono mut" x="56" y="60" font-size="11.5" font-weight="500" letter-spacing="0.4">ROBOTICS ENGINEER</text>
+<text class="in d2" x="56" y="118" font-size="44" font-weight="600" letter-spacing="-1.1">Mohammed Abdul Rahman</text>
+<text class="in d3 mut" x="56" y="156" font-size="15" letter-spacing="-0.1">Motion planning, manipulation, and the bringup that makes them run.</text>
+<path class="in d4" d="M56 190H944" stroke="#d1d9e0"/>
+<g class="in d4"><text class="mono mut" x="56" y="216" font-size="10" font-weight="500" letter-spacing="0.5">NOW</text><text x="56" y="238" font-size="13" font-weight="500" letter-spacing="-0.05">Advanced Robotics and AI intern, Siemens</text></g>
+<g class="in d4"><text class="mono mut" x="356" y="216" font-size="10" font-weight="500" letter-spacing="0.5">STUDY</text><text x="356" y="238" font-size="13" font-weight="500" letter-spacing="-0.05">MS Robotics, Northeastern ’27</text></g>
+<g class="in d4"><text class="mono mut" x="656" y="216" font-size="10" font-weight="500" letter-spacing="0.5">BASED</text><text x="656" y="238" font-size="13" font-weight="500" letter-spacing="-0.05">Berkeley, California</text></g>
 </svg>

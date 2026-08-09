@@ -34,10 +34,11 @@ os.makedirs(OUT, exist_ok=True)
 T = theme_from_argv(sys.argv)
 SFX = suffix(T)
 
-# Six slices need six slots and four hues clear every gate, so the last two are
-# the neutral tint and the muted grey. The order keeps the two warm hues apart,
-# since adjacent pairs are what a stacked bar has to separate.
-SER = [T["c1"], T["c3"], T["c4"], T["c2"], T["tint"], T["mut"]]
+# Six slices, six steps of the neutral ramp, largest share darkest. Adjacent
+# steps are what a stacked bar has to separate, and tools/check_palette.py
+# holds them at least 8 dL* apart -- which is a separation every form of colour
+# vision agrees on, unlike the four hues this used to reach for.
+SER = T["ramp"]
 
 W, H = 1000, 300
 PY, PH = 18, 264
@@ -86,18 +87,6 @@ s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}"
      f' height="{H}" fill="none" role="img" aria-label="{ALT}">',
      '<title>Counted, not claimed</title>',
      f'''<defs>
-<linearGradient id="plate" x1="0" y1="0" x2="0.3" y2="1">
-  <stop offset="0" stop-color="{T['panel']}"/><stop offset="1" stop-color="{T['bg']}"/>
-</linearGradient>
-<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
-  <stop offset="0" stop-color="{T['edge']}" stop-opacity="0"/>
-  <stop offset="0.3" stop-color="{T['edge']}" stop-opacity="0.75"/>
-  <stop offset="1" stop-color="{T['edge']}" stop-opacity="0"/>
-</linearGradient>
-<filter id="lift" x="-8%" y="-20%" width="116%" height="150%">
-  <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="{T['shadow']}"
-                flood-opacity="{0.08 if T['name'] == 'light' else 0.42}"/>
-</filter>
 <style>
   text {{ font-family:{SANS} }}
   .mono {{ font-family:{MONO} }}
@@ -118,23 +107,18 @@ s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}"
      f'<rect width="{W}" height="{H}" fill="{T["bg"]}"/>']
 
 
-def frame(x, w, title, sub, accent):
+def frame(x, w, title, sub):
     return "\n".join([
-        f'<rect x="{x}" y="{PY}" width="{w}" height="{PH}" rx="14" '
-        f'fill="url(#plate)" filter="url(#lift)"/>',
-        f'<rect x="{x}.5" y="{PY}.5" width="{w-1}" height="{PH-1}" rx="13.5" '
-        f'stroke="{T["line"]}"/>',
-        f'<path d="M{x+24} {PY}H{x+w-24}" stroke="url(#edge)" stroke-width="1.2"/>',
-        f'<circle cx="{x+26}" cy="{PY+30}" r="3.5" fill="{accent}"/>',
-        f'<text class="head" x="{x+38}" y="{PY+34}" fill="{T["txt"]}">{title}</text>',
+        f'<rect x="{x}.5" y="{PY}.5" width="{w-1}" height="{PH-1}" rx="6" '
+        f'fill="{T["bg"]}" stroke="{T["line"]}"/>',
+        f'<text class="head" x="{x+26}" y="{PY+34}" fill="{T["txt"]}">{title}</text>',
         f'<text class="sub" x="{x+26}" y="{PY+56}" fill="{T["mut"]}">{sub}</text>'])
 
 
 # ── commits per month ─────────────────────────────────────────────────────
 s.append(frame(AX, AW, "Commit cadence",
                f'{tot} commits authored · {keys[0]} to {keys[-1]} · '
-               f'{act} active months · median {med:.0f} · peak {peak}',
-               T["c1"]))
+               f'{act} active months · median {med:.0f} · peak {peak}'))
 x0, x1 = AX + 46, AX + AW - 22
 yb, yt = PY + 214, PY + 92
 pitch = (x1 - x0) / len(keys)
@@ -154,7 +138,7 @@ for i, (k, v) in enumerate(zip(keys, vals)):
     r = min(4.0, bw / 2, bh)
     s.append(f'<path class="bar" style="animation-delay:{i*0.012:.2f}s" '
              f'd="M{bx:.1f} {yb}v{-(bh-r):.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {-r:.1f}'
-             f'h{bw-2*r:.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {r:.1f}V{yb}z" fill="{T["c1"]}"/>')
+             f'h{bw-2*r:.1f}a{r:.1f} {r:.1f} 0 0 1 {r:.1f} {r:.1f}V{yb}z" fill="{T["ramp"][1]}"/>')
 bx = x0 + peak_i * pitch + pitch / 2
 s.append(f'<text class="mono ax" x="{bx:.1f}" y="{yb-(peak/ymax)*(yb-yt)-8:.1f}" '
          f'fill="{T["txt"]}" text-anchor="middle">{peak}</text>')
@@ -171,8 +155,7 @@ s.append(f'<text class="ax" x="{x0}" y="{yt-10}" fill="{T["mut"]}">commits per m
 
 # ── source mix ────────────────────────────────────────────────────────────
 s.append(frame(BX, BW, "Source mix",
-               f'bytes across {lang["repos"]} own repos · forked upstreams excluded',
-               T["c4"]))
+               f'bytes across {lang["repos"]} own repos · forked upstreams excluded'))
 sx0, sw = BX + 26, BW - 52
 sy, sh = PY + 78, 26
 GAP = 2.0
