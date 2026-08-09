@@ -78,7 +78,7 @@ def lch(h):
     return L, math.hypot(a, b), math.degrees(math.atan2(b, a)) % 360
 
 
-def report(name, paper, ink, cats):
+def report(name, paper, ink, cats, l_lo=44, l_hi=88):
     print("=== %s  (paper %s) ===" % (name, paper))
     bad = 0
     print("  %-8s %-9s %6s %6s %6s   %s" % ("role", "hex", "L*", "C*", "vs bg", "note"))
@@ -86,8 +86,8 @@ def report(name, paper, ink, cats):
         L, C, H = lch(v)
         c = contrast(v, paper)
         why = []
-        if not (44 <= L <= 88):
-            why.append("L* outside 44-88")
+        if not (l_lo <= L <= l_hi):
+            why.append("L* %.0f outside %d-%d" % (L, l_lo, l_hi))
         if C < 18:
             why.append("chroma %.0f below 18" % C)
         if c < 3.0:
@@ -110,13 +110,38 @@ def report(name, paper, ink, cats):
     return bad
 
 
-POSTER = {"red": "#e0452c", "rust": "#b85236", "sage": "#7fae8e", "amber": "#e0a03a"}
+import os
 
-bad = report("poster", "#100c0b", "#f2e8dd", POSTER)
-# bone is the neutral slot: near the text colour on purpose, so it is checked
-# for contrast rather than for being a hue of its own
-print("=== bone, the neutral ===")
-c = contrast("#e8dcc8", "#100c0b")
-print("  bone     #e8dcc8   %5.2f:1 on the plate   %s" % (c, "ok" if c >= 4.5 else "TOO LOW"))
-bad += c < 4.5
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from palette import THEMES
+
+# The lightness band is per-theme. On paper an accent has to be dark enough to
+# clear 3:1 against near-white; on a warm black it has to be light enough to
+# clear 3:1 the other way. One band for both would fail whichever theme it was
+# not written for, which is the whole reason the accents are per-theme.
+BAND = {"light": (34, 62), "dark": (58, 84)}
+
+bad = 0
+for t in THEMES:
+    lo, hi = BAND[t["name"]]
+    cats = {"c1": t["c1"], "c2": t["c2"], "c3": t["c3"], "c4": t["c4"]}
+    bad += report(t["name"], t["bg"], t["txt"], cats, lo, hi)
+
+    # The tint is the neutral slot -- deliberately near the body text, so it is
+    # checked for contrast rather than for being a hue of its own.
+    c = contrast(t["tint"], t["bg"])
+    ok = c >= 4.5
+    print("  tint     %-9s %5.2f:1 on the plate   %s" % (t["tint"], c, "ok" if ok else "TOO LOW"))
+    bad += not ok
+
+    # Body text carries prose, so it is held to 7:1 rather than 4.5:1, and the
+    # muted colour to 4.5:1 since it only ever carries labels.
+    for role, floor in (("txt", 7.0), ("mut", 4.5)):
+        c = contrast(t[role], t["bg"])
+        ok = c >= floor
+        print("  %-8s %-9s %5.2f:1 (floor %.1f)   %s"
+              % (role, t[role], c, floor, "ok" if ok else "TOO LOW"))
+        bad += not ok
+    print()
+
 sys.exit(1 if bad else 0)
